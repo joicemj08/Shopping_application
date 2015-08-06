@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-
+sdf;lsd;flsd
   resources :categories
-  resources :products, defaults: {format: :html}
+  resources :products
   resources :users
 
   resources :categories do
