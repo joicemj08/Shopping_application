@@ -1,0 +1,27 @@
+<p>
+  <strong>Welcome,</strong>
+  <%= @user.to_s %>
+</p>
+<p>
+  <%= image_tag @user.avatar.url(:thumb) %>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<p>
+  <strong>First Name:</strong>
+  <%= @user.first_name %>
+</p>
+<p>
+  <strong>Last Name:</strong>
+  <%= @user.last_name %>
+</p>
+<p>
+  <strong>Role:</strong>
+  <%= @user.role %>
+</p>
+
+<td><%= link_to 'Update deatils', edit_user_path(@user) %></td>
+
+ 

@@ -1,0 +1,26 @@
+<div class="row">
+  <h2>PRODUCTS</h2>
+</div>
+
+<div class="row">
+  <%= form_tag products_path, :method => 'get', :id =>"products_search" do %>
+    <p>
+      <%= text_field_tag :search, params[:search], :id=>"text" %>
+      <%= submit_tag "Search", :name => nil, :id=>"search_button" %>
+      <div id="products_div"><%= render 'products' %></div>
+    </p>
+
+  <% end %>
+  <script>
+    $(document).ready(function(){
+      $("#search_button").click(function(){
+        alert($("#text").val());
+      });
+    });
+</script>
+  <div class="row">
+    <%= link_to 'ADD PRODUCT', new_product_path %>
+  </div>
+  <!---->
+
+</div>

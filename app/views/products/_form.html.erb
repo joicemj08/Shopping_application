@@ -1,0 +1,27 @@
+<div class="row">
+  <h2>PRODUCTS</h2>
+</div>
+<div class="thumbnail">
+<%= form_for(@product) do |f| %>
+ <p>
+    <%= f.label :Name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+   <%= f.label :CategoryID %><br>
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+  </p>
+  <p>
+    <%= f.label :Unitprice %><br>
+    <%= f.text_field :unit_price %>
+  </p>
+  <p>
+    <%= f.label :Quantity %><br>
+    <%= f.text_field :quantity %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+</div>

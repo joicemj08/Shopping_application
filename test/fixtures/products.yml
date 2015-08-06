@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cat_id: MyString
+  unitprice: 1.5
+  quantity: 1
+
+two:
+  name: MyString
+  cat_id: MyString
+  unitprice: 1.5
+  quantity: 1

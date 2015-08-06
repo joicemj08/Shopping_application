@@ -1,0 +1,34 @@
+
+<p>
+	<strong>Code:</strong>
+  	<%= @category.code %>
+</p>
+<p>
+    <strong>name:</strong>
+    <%= @category.name %>
+</p>
+<p>
+ 	<strong>Created at:</strong>
+    <%= @category.created_at %>
+</p>
+<p>
+    <strong>Updated at:</strong>
+    <%= @category.updated_at %>
+</p>
+<table class="table">
+    <tr>
+        <td>Product Name</td>
+        <td>Unit Price</td>
+        <td>Quantity</td>
+    </tr>
+    <% @products.each_with_index do |product, index| %>
+    <tr>
+        <td><%= product.name %></td>
+        <td><%= product.unit_price %></td>
+        <td><%= product.quantity %></td>
+    </tr>
+    <% end %>
+</table>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'All Categories', categories_path %>

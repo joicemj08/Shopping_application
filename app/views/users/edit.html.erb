@@ -1,0 +1,27 @@
+<div class="row">
+  <h2>EDIT DEATILS</h2>
+</div>
+<div class="thumbnail">
+  <%= form_for (@user) do |f| %>
+    <p>
+      <%= f.label :FirstName %><br>
+      <%= f.text_field :first_name %>
+    </p>
+    <p>
+      <%= f.label :LastName %><br>
+      <%= f.text_field :last_name %>
+    </p>
+    <p>
+      <%= f.label :Email %><br>
+      <%= f.text_field :email %>
+    </p>
+    <p>
+    <p>
+      <strong>Add photo</strong>
+      <%= f.file_field :avatar %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
+</div>
