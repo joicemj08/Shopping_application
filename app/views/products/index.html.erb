@@ -16,7 +16,17 @@
       $("#search_button").click(function(){
         alert($("#text").val());
       });
-    });
+   });
+    $.ajax({
+  url: '/products',
+  type: 'GET',
+  dataType: 'json',
+  beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('product'))
+            },
+  success: function(data){/*do something meaningful with data*/},
+  error: function(xhr, status, response) {/* your error callback*/}
+})
 </script>
   <div class="row">
     <%= link_to 'ADD PRODUCT', new_product_path %>
