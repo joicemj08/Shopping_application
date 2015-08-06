@@ -15,8 +15,5 @@
 //= require turbolinks
 //= require_tree.
 
-  // Ajax search on keyup
- //  $("#products_search input").click( {
-   // $var = get($("#products_search");
-    //return false;
- // });
+
+
