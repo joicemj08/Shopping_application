@@ -1,40 +1,51 @@
-<div class="row">
+<div class="row" style = "text-align: center;" >
   <h2>CATEGORIES</h2>
-
 </div>
 <div class="row">
-  <%= form_tag categories_path, :method => 'get', :id =>"categories_search" do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
-    <% end %>
-  <div class="row">
-    <%= link_to 'ADD CATEGORY', new_category_path %>
+  <%= form_tag categories_path, :method => 'get', :id =>"categories_search", style: "padding: 20px" do %>
+    <div class="col-lg-6">
+      <div class="input-group">
+        <%= text_field_tag :search, params[:search], :id =>"text", :class=>"form-control" %>
+        <span class="input-group-btn">
+          <%= submit_tag "Search", :name => nil, :id => "search_button", :class=>"btn btn-default" %>
+        </span>
+      </div><!-- /input-group -->
+    </div>
+    <%= link_to 'ADD CATEGORY', new_category_path, :class=>'btn btn-success'%>
+  <% end %>
+  <div id="categories_div">
+    <%= render partial: 'categories' %>
   </div>
-  <div class="row">
-    <table class="table">
-      <tr>
+  <script>
+  $(function () {
+    $("#search_button").click(function() {
+        alert($("#text").val());
+        var search_content = $("#text").val();
+        $.ajax({
+          url: '/search',
+          method: 'POST',
+          dataType: 'json',
+          data: {
+            'search': search_content
+          },
+          success: function(data){
+            var length = data.length;
+            alert(length);
+            var categories = "";
+            for(var i=0; i<length; i++){
+            categories += '<td>' + data[i].code + '</td>' +
+                          '<td>' + data[i].name + '</td>' +
+                          '<td><a href="/categories/2">Show</a></td>
+                          <td><a href="/categories/2/edit">Edit</a></td>
+                          <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/categories/2">Destroy</a></td>
+        </tr>'
+          }
+          $('#categories_div').html(categories);
+          },
+        });
+        return false;
+      });
+  });
+</script>
 
-        <th>code</th>
-        <th>name</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-
-      <% @category.each do |category| %>
-        <tr>
-
-          <td><%= category.code %></td>
-          <td><%= category.name %></td>
-          <td><%= link_to 'Show', category_path(category) %></td>
-          <td><%= link_to 'Edit', edit_category_path(category) %></td>
-          <td><%= link_to 'Destroy', category_path(category),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
 </div>

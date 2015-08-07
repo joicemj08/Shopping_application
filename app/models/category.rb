@@ -5,8 +5,13 @@ class Category < ActiveRecord::Base
   validates_uniqueness_of :code, :name
   has_many :products, dependent: :destroy
   def self.search(search)
+    p "inside search"
+    p search
+
     if search
-      self.where("name like ?", "%#{search}%")
+      where("name like ?", "%#{search}%")
+    else
+      all
     end
   end
 end
