@@ -6,6 +6,9 @@ class Category < ActiveRecord::Base
   has_many :products, dependent: :destroy
   def self.search(search)
     if search
+# This is a test comment
+# This is a test comment
+# This is a test comment
       self.where("name like ?", "%#{search}%")
     end
   end
