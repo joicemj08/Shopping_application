@@ -1,36 +1,25 @@
-<div class="row">
+<div class="row" style = "text-align: center;">
   <h2>PRODUCTS</h2>
 </div>
 
 <div class="row">
-  <%= form_tag products_path, :method => 'get', :id =>"products_search" do %>
-    <p>
-      <%= text_field_tag :search, params[:search], :id=>"text" %>
-      <%= submit_tag "Search", :name => nil, :id=>"search_button" %>
-      <div id="products_div"><%= render 'products' %></div>
-    </p>
+  <%= javascript_include_tag "products.js" %>
+  <%= form_tag products_path, :method => 'get', :id =>"products_search", style: "padding: 20px" do %>
+    <div class="col-lg-6">
+      <div class="input-group" style = "width: 60%">
+        <%= text_field_tag :search, params[:search], :id =>"text", :class=>"form-control" %>
+        <span class="input-group-btn">
+          <%= submit_tag "Search", :name => nil, :id => "search_button", :class=>"btn btn-default" %>
+        </span>
+      </div><!-- /input-group -->
+    </div>
 
-  <% end %>
-  <script>
-    $(document).ready(function(){
-      $("#search_button").click(function(){
-        alert($("#text").val());
-      });
-   });
-    $.ajax({
-  url: '/products',
-  type: 'GET',
-  dataType: 'json',
-  beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('product'))
-            },
-  success: function(data){/*do something meaningful with data*/},
-  error: function(xhr, status, response) {/* your error callback*/}
-})
-</script>
-  <div class="row">
-    <%= link_to 'ADD PRODUCT', new_product_path %>
-  </div>
+    <%= link_to 'ADD PRODUCT', new_product_path, :class=>'btn btn-success'%>
+     <% end %>
+    <div id="products_div">
+      <%= render partial: 'products' %>
+    </div>
+    <%= paginate @products, :window => 2 %>
   <!---->
 
 </div>

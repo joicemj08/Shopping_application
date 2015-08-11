@@ -1,21 +1,24 @@
 Rails.application.routes.draw do
-  devise_for :users
 
-  resources :categories
+  devise_for :users, :controllers => { :sessions => "sessions" }
+  resources :categories, defaults: {format: :html}
   resources :products, defaults: {format: :html}
   resources :users
-
+  resources :home
   resources :categories do
     resources :products
   end
-
-  get 'home/index'
-
+  concern :paginatable do
+    get '(page/:page)', :action => :index, :on => :collection, :as => ''
+  end
+  resources :my_resources, :concerns => :paginatable
+ # get 'home/index'
+  get '/search' => 'categories#search'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'categories#index'
+  root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

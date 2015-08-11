@@ -1,0 +1,26 @@
+ <table class="table table-bordered ">
+    <thead>
+      <tr>
+
+        <th>CODE</th>
+        <th>NAME</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody id="categories-tbody">
+        <% @categories.each do |category| %>
+          <tr>
+
+            <td><%= category.code %></td>
+            <td><%= category.name %></td>
+            <td><%= link_to 'Show', category_path(category) %></td>
+            <td><%= link_to 'Edit', edit_category_path(category) %></td>
+            <td><%= link_to 'Destroy', category_path(category),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>

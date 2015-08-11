@@ -1,2 +1,3 @@
 module UsersHelper
+  FLASH_CONSTANT = "YOU ARE NOT AUTHORIZED TO VIEW THIS PAGE"
 end

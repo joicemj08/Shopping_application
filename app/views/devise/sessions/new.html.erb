@@ -1,27 +1,50 @@
-<div class = "container" style = "width:50%;">
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-group">
-    
-    <%= f.email_field :email, autofocus: true, :class=>"form-control input-lg",  :placeholder=>"Email" %>
+<div id = "mainWrap">
+<div class = "container" style = "width:50%; text-align:center;">
+  <div id="loggit">
+        <h3>Please <strong>Login</strong> </h3>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <form action="#" id="logForm" method="post" class="form-horizontal">
+          <div class="form-group" >
+            <div class="col-xs-12" style="margin-bottom:15px;">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
+                 <%= f.email_field :email, autofocus: true, :class=>"form-control input-lg",  :placeholder=>"Email" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-xs-12" style="margin-bottom:15px;">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                <%= f.password_field :password, autocomplete: "off", :class=>"form-control input-lg",  :placeholder=>"Password" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group formSubmit">
+            <div class="col-sm-7">
+              <div class="checkbox">
+                <% if devise_mapping.rememberable? -%>
+                  <div class="field" style="color : #337AB7;">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :keep_me_logged_in %>
+                  </div>
+                <% end -%>
+              </div>
+            </div>
+            <div class="col-sm-5 submitWrap">
+              <div class="actions">
+                <%= f.submit "Log in", :class => "btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group formNotice">
+            <div class="col-xs-12">
+              <%= render "devise/shared/links" %>
+            </div>
+          </div>
+        </form>
+        <% end %>
+      </div>
   </div>
 
-  <div class="form-group">
-    
-    <%= f.password_field :password, autocomplete: "off", :class=>"form-control input-lg",  :placeholder=>"Password" %>
-  </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in", :class => "btn btn-primary" %>
-  </div>
-<% end %>
-<%= render "devise/shared/links" %>
-</div>

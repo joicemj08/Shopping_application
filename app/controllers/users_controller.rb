@@ -5,7 +5,13 @@ class UsersController < ApplicationController
   end
 
   def index
-    @user = User.all
+    if current_user.manager?
+      @users = User.order("first_name").page(params[:page])
+    else
+      flash[:notice] = NOT_AUTHORIZED
+      redirect_to home_index_path
+    end
+    #@users = order("first_name").page(params[:page])
   end
 
   def edit
@@ -27,9 +33,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-      if @user.update(user_params)
-        redirect_to @user
-      end
+    if @user.update(user_params)
+      redirect_to @user
+    end
   end
 
   def user_params

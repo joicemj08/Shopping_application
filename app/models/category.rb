@@ -4,6 +4,7 @@ class Category < ActiveRecord::Base
   validates_presence_of :code, :name
   validates_uniqueness_of :code, :name
   has_many :products, dependent: :destroy
+  paginates_per 3
   def self.search(search)
     p "inside search"
     p search

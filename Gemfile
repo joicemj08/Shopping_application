@@ -26,7 +26,7 @@ gem "font-awesome-rails"
 gem 'therubyracer'
 
 gem 'devise'
-# gem 'client_side_validations' 
+# gem 'client_side_validations'
 gem "paperclip", "~> 4.3"
 
 gem 'less-rails-bootstrap', '~> 3.0'
@@ -34,6 +34,10 @@ gem 'less-rails-bootstrap', '~> 3.0'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+gem "font-awesome-rails"
+
+gem 'kaminari'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -4,7 +4,7 @@
 <div class="row">
   <%= form_tag categories_path, :method => 'get', :id =>"categories_search", style: "padding: 20px" do %>
     <div class="col-lg-6">
-      <div class="input-group">
+      <div class="input-group" style = "width: 60%">
         <%= text_field_tag :search, params[:search], :id =>"text", :class=>"form-control" %>
         <span class="input-group-btn">
           <%= submit_tag "Search", :name => nil, :id => "search_button", :class=>"btn btn-default" %>
@@ -13,38 +13,38 @@
     </div>
     <%= link_to 'ADD CATEGORY', new_category_path, :class=>'btn btn-success'%>
   <% end %>
+  <%= paginate @categories, :window => 2 %>
   <div id="categories_div">
     <%= render partial: 'categories' %>
   </div>
   <script>
   $(function () {
     $("#search_button").click(function() {
-        alert($("#text").val());
         var search_content = $("#text").val();
         $.ajax({
           url: '/search',
-          method: 'POST',
+          method: 'GET',
           dataType: 'json',
           data: {
             'search': search_content
           },
           success: function(data){
             var length = data.length;
-            alert(length);
             var categories = "";
             for(var i=0; i<length; i++){
-            categories += '<td>' + data[i].code + '</td>' +
-                          '<td>' + data[i].name + '</td>' +
-                          '<td><a href="/categories/2">Show</a></td>
-                          <td><a href="/categories/2/edit">Edit</a></td>
-                          <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/categories/2">Destroy</a></td>
-        </tr>'
+              categories += '<tr><td>' + data[i].code + '</td>' +
+                            '<td>' + data[i].name + '</td>' +
+                            '<td><a href="/categories/' + data[i].id + '">Show</a></td>' +
+                            '<td><a href="/categories/'+ data[i].id +'">Edit</a></td>'+
+                            '<td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete"'+
+                            ' href="/categories/' + data[i].id + '">Destroy</a></td></tr>';
+            }
+            $('#categories-tbody').html(categories);
           }
-          $('#categories_div').html(categories);
-          },
         });
         return false;
       });
   });
 </script>
+
 </div>

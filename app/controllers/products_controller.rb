@@ -11,11 +11,15 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
-    @products = Product.search(params[:search]) if params[:search].present?
+    # @products = Product.all
+    @products = Product.order("name").page(params[:page])
     respond_to do |format|
-        format.html # index.html.erb
-        format.json { render json: @products }
+      format.html #{ render html: @products }# index.html.erb
+      format.json do
+        html_string = render_to_string(
+          'products/_products.html.erb', format: [:html], layout: false)
+          render json: { html_string: html_string, products: @products }
+      end
     end
   end
 
