@@ -13,10 +13,15 @@
     </div>
     <%= link_to 'ADD CATEGORY', new_category_path, :class=>'btn btn-success'%>
   <% end %>
-  <%= paginate @categories, :window => 2 %>
+
   <div id="categories_div">
     <%= render partial: 'categories' %>
   </div>
+  <div class="pagination">
+        <ul>
+          <li> <%= paginate @categories, :window => 2 %></li>
+        </ul>
+    </div>
   <script>
   $(function () {
     $("#search_button").click(function() {

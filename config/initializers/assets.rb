@@ -4,6 +4,9 @@ Rails.application.config.assets.precompile += %w( rails.validations.js )
 Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( products.js )
+Rails.application.config.assets.precompile += %w( style_home.css )
+Rails.application.config.assets.precompile += %w( home.js )
+Rails.application.config.assets.precompile += %w( home.css )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

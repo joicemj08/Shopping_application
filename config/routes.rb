@@ -1,13 +1,21 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :controllers => { :sessions => "sessions" }
+  devise_for :users, :controllers => { :sessions => "sessions", registrations: "registrations" }
   resources :categories, defaults: {format: :html}
   resources :products, defaults: {format: :html}
   resources :users
   resources :home
+  resources :offers
+  resources :dashboard
+
   resources :categories do
     resources :products
   end
+  resources :products do
+    resources :offers
+  end
+
+
   concern :paginatable do
     get '(page/:page)', :action => :index, :on => :collection, :as => ''
   end

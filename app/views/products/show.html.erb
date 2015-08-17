@@ -22,3 +22,14 @@
     <strong>Updated at:</strong>
     <%= @product.updated_at %>
 </p>
+<%= image_tag @product.avatar.url(:thumb) %>
+<table class="table">
+    <tr>
+        <td><strong>Offers</strong></td>
+    </tr>
+    <% @offers.each_with_index do |offer, index| %>
+    <tr>
+        <td><%= offer.description %></td>
+    </tr>
+    <% end %>
+</table>

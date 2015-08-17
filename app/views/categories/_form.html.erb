@@ -1,7 +1,6 @@
-<div class="thumbnail">
+<div class="thumbnail" style="padding:20px">
   <h2>CATEGORIES</h2>
-</div>
-<div class="thumbnail">
+  <div id="error"></div>
 <%= form_for(@category) do |f| %>
  <% if @category.errors.any? %>
       <ul>
@@ -19,7 +18,28 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.submit %>
+     <%=f.button :submit, :type=>'button', :OnClick =>'validateForm()' %>
+
   </p>
 <% end %>
+ <script>
+function validateForm(){
+    var name = $('#category_name').val();
+    var code = $('#category_code').val();
+    flag = 0;
+    $("#error").html (' ');
+    if (name.length <=3 ){
+      $("#error").append("<br>* Name is too short (minimum is 3 characters) ");
+      flag = 1;
+    }
+    if (code.length <=3 ){
+      $("#error").append("<br>* Code is too short (minimum is 3 characters) ");
+      flag = 1;
+    }
+    if (flag == 0)
+      $("#new_category").submit();
+
+
+  }
+</script>
 </div>

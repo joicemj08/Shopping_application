@@ -1,0 +1,102 @@
+<html dir="ltr" lang="en"><!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home-Shopping application</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style_home.css" media="all">
+<%= stylesheet_link_tag    'home', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'home', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+
+</head>
+<body class="common-home">
+    <nav id="top">
+        <div class="container">
+            <div class="pull-left">
+                <div class="btn-group">
+                </div>
+            </div>
+        <div id="top-links" class="nav pull-right">
+            <ul class="list-inline">
+                <li class="dropdown">
+                      <% if user_signed_in? %>
+                          <li>
+                              <%= link_to(current_user, user_path(current_user)) %>
+                          </li>
+                          <li>
+                              <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+                          </li>
+                      <% else %>
+                          <ul>
+                              My Account
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+
+                                  <span class="caret"></span>
+                              </a>
+
+
+                              <ul class="dropdown-menu dropdown-menu-right">
+                                  <li><%=link_to "Register", new_user_registration_path %></li>
+                                  <li><%= link_to "Login", new_user_session_path %></li>
+                              </ul>
+
+                          </ul>
+                      <% end %>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <div id="logo">
+                <h2>QUICK DEALS</h2>
+                    </div>
+        </div>
+        <div class="col-sm-5"> </div>
+        <div class="col-sm-3"></div>
+  </div>
+      </div>
+    </div>
+</header>
+<div class="container">
+  <nav id="menu" class="navbar">
+    <div class="navbar-header">
+        <span id="category" class="visible-xs">
+        </span>
+        <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <i class="fa fa-bars"></i>
+        </button>
+    </div>
+  </nav>
+</div>
+<div class="container">
+  <div class="row">
+    <div id="content" class="col-sm-12">
+        <%= yield %>
+
+    </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row">
+            <div class="col-sm-3">
+        <h5></h5>
+        <ul class="list-unstyled">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+      </div>
+    </div>
+
+    <p><center>copyright © joice@qburst.com</center></p>
+  </div>
+</footer>

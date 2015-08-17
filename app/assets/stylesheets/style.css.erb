@@ -16,13 +16,24 @@ body{
     padding: 50px !important;
     border-radius: 5px;
 }
+#display-products{
+  background-color: lightgrey;
 
+    padding: 25px;
+    border: 5px solid navy;
+    height: 100px;
+    /*margin: 25px;*/
+}
 #loggit {
     height: 275px;
     background: transparent url("<%= asset_path('75.png')%>") repeat scroll 0% 0%;
     width: 480px;
     margin: 5% auto 0px;
     padding: 20px 40px;
+}
+
+#loggit .checkbox-style{
+    padding-left: 5px !important;
 }
 
 #loggit h1 {
@@ -71,6 +82,12 @@ body{
 .pagination {
 
   margin: 18px 0;
+
+}
+.pagination span{
+  background: #fff;
+  padding: 5px;
+  margin: 0px 3px;
 }
 .pagination ul {
   display: inline-block;
@@ -83,17 +100,42 @@ body{
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
-
-
 }
+
 .pagination li {
   display: inline;
 }
-#footer {
-    background-color:black;
-    color:white;
-    clear:both;
-    text-align:center;
-   padding:5px;
+.product-layout{
+  font-family: "Open Sans",sans-serif;
+font-weight: 400;
+color: rgb(102, 102, 102);
+font-size: 14px;
+line-height: 20px;
+background-color: #fff;
+}
+
+/*.product-thumb{
+
+  margin-bottom: 20px;
+  overflow: auto;
+  text-align: center;
+  padding: 0px 20px;
+  min-height: 180px;
+  height: 100px;
+  width: 100px;
+}*/
+/*.image{
+  text-align: center;
+}
+*/.product-thumb .image img{
+  width:100px !important;
+  height: 100px !important;
+}
+
+.caption{
+  padding: 0px 20px;
+  min-height: 180px;
+}
+.price{
+  color: #444;
 }

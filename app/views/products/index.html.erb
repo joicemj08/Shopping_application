@@ -19,7 +19,11 @@
     <div id="products_div">
       <%= render partial: 'products' %>
     </div>
-    <%= paginate @products, :window => 2 %>
-  <!---->
+    <div class="pagination">
+        <ul>
+          <li> <%= paginate @products, :window => 2 %></li>
+        </ul>
+    </div>
+
 
 </div>

@@ -1,17 +1,21 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    redirect_to user_path(current_user) unless current_user.id == @user.id
+    redirect_to home_index_path unless current_user.id == @user.id
   end
 
   def index
-    if current_user.manager?
-      @users = User.order("first_name").page(params[:page])
-    else
+    #if current_user.manager?
+     # @users = User.order("first_name").page(params[:page])
+    #else
       flash[:notice] = NOT_AUTHORIZED
       redirect_to home_index_path
-    end
-    #@users = order("first_name").page(params[:page])
+    #end
+  end
+
+  def create
+    @user = User.new(params[:id])
+
   end
 
   def edit
@@ -20,15 +24,6 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-  end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to @user
-    else
-      render 'new'
-    end
   end
 
   def update

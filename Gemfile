@@ -14,8 +14,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'bootstrap-sass', :git => 'https://github.com/twbs/bootstrap-sass.git', :branch => 'next'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+
 gem 'autoprefixer-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -24,6 +23,7 @@ gem 'turbolinks'
 
 gem "font-awesome-rails"
 gem 'therubyracer'
+gem 'flexslider', :git => 'https://github.com/constantm/Flexslider-2-Rails-Gem.git'
 
 gem 'devise'
 # gem 'client_side_validations'
@@ -35,9 +35,10 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem "font-awesome-rails"
-
 gem 'kaminari'
+
+gem 'tinymce-rails'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

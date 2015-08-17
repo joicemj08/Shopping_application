@@ -8,11 +8,11 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @category = @product.category
+    @offers = @product.offers
   end
 
   def index
-    # @products = Product.all
-    @products = Product.order("name").page(params[:page])
+    @products = Product.search(params[:search]).page(params[:page])
     respond_to do |format|
       format.html #{ render html: @products }# index.html.erb
       format.json do
@@ -30,7 +30,6 @@ class ProductsController < ApplicationController
   def edit
     @product = Product.find(params[:id])
   end
-  #@data = Category.where(:name => '@category.name' )
 
   def create
     @product = Product.new(product_params)
@@ -60,6 +59,6 @@ class ProductsController < ApplicationController
 
   # Permitted params for product
   def product_params
-    params.require(:product).permit(:name, :category_id, :unit_price, :quantity)
+    params.require(:product).permit(:name, :category_id, :unit_price, :quantity, :avatar)
   end
 end

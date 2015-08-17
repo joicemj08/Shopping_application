@@ -1,6 +1,55 @@
 
-  <% if flash[:notice] %>
-      <div class="notice" style= "color: red; margin-left:200px;"><%= flash[:notice] %></div>
-  <% end %>
+<% if flash[:notice] %>
+    <div class="notice" style= "color: red; margin-left:200px;"><%= flash[:notice] %></div>
+<% end %>
+<div id="slideshow0" class="flexslider">
+    <div class="flex-viewport">
+        <ul class="slides">
+            <% @offers.each do |offer| %>
+            <li>
+                <div class="row">
+                    <div class="col-xs-6">
+                      <%= image_tag offer.avatar.url(:thumb), style: "width: 250px !important;" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <h2> <%= offer.product.name %> </h2>
+                       <%= offer.description.html_safe %>
+                    </div>
+                </div>
+            </li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+<div class="row product-layout">
+    <% @products.each do |product| %>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="product-thumb transition" style="height: 250px; overflow:hidden;" >
+                <div class="image">
+                    <%= image_tag product.avatar.url(:thumb) %>
+                </div>
+                <div class="caption">
+                    <h4> <%= product.name %><br></h4>
+                    <p>
+                        <strong>Category :</strong> <%= product.category.name %><br>
+                  <!-- <td><%= product.name %></td> -->
+                        <p class="price">
+                            <strong>Price :</strong> <%= product.unit_price %><br>
+                        </p>
+                        <p class="price">
+                            <strong>Quantity Remaining :</strong> <%= product.quantity %><br>
+                        </p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+<script>
+    $(window).load(function() {
+        $('.flexslider').flexslider();
+        $('.flex-next, .flex-prev').empty();
+    });
+</script>
 
 

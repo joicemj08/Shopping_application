@@ -9,9 +9,9 @@ module ApplicationHelper
 
   def link_visible?(page_name)
     if current_user.manager?
-      pages = ['home', 'products', 'categories', 'users']
+      pages = ['dashboard', 'products', 'categories', 'users', 'offers']
     else
-      pages = ['home', 'products', 'categories']
+      pages = ['products', 'categories']
     end
 
     pages.include?(page_name)

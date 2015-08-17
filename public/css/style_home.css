@@ -1,0 +1,26 @@
+.flex-direction-nav a:before {
+  content: '' !important;
+  color: #FFF;
+}
+
+.flex-direction-nav a.flex-next:before {
+  content: '' !important;
+  color: #FFF;
+}
+
+body {
+  border: 2px !important;
+}
+.flex-next, .flex-next:hover {
+    background-image: url("/images/right-arrow.png");
+    background-repeat: no-repeat;
+}
+
+.flex-prev, .flex-prev:hover {
+    background-image: url("/images/left-arrow.png");
+    background-repeat: no-repeat;
+}
+.flexslider .slides img{
+  margin-left: 100px;
+}
+
