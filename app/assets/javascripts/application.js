@@ -12,8 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require turbolinks
 //= require tinymce
+//= require cocoon
+//= require bootstrap-modal
+//= require bootstrap-modalmanager
 //= require_tree.
+
+
+
 
 

@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+   before_action :authenticate_user!
   def index
     @categories = Category.order("name").page(params[:page])
   end
@@ -48,6 +49,6 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:code, :name)
+    params.require(:category).permit(:code, :name, sub_categories_attributes: [:id, :code, :name, :category_id, :_destroy])
   end
 end

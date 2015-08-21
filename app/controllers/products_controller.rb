@@ -4,6 +4,7 @@
 # @author [Joice]
 #
 class ProductsController < ApplicationController
+  before_action :authenticate_user!,except: :search
   # GET#show - /products/:id
   def show
     @product = Product.find(params[:id])
@@ -53,6 +54,15 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_path
+  end
+
+  def search
+    if(params[:category] == 'Categories')
+      @products = Product.select("products.*, categories.name AS category_name").joins(:category).where(category_id: params[:id])
+    else
+      @products = Product.select("products.*, categories.name AS category_name").joins(:category).where(id: params[:id])
+    end
+    render :json => @products.as_json(methods: :avatar_url)
   end
 
   private

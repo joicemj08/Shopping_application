@@ -1,45 +1,56 @@
 <div class="thumbnail" style="padding:20px">
   <h2>CATEGORIES</h2>
   <div id="error"></div>
-<%= form_for(@category) do |f| %>
- <% if @category.errors.any? %>
+  <%= form_for(@category) do |f| %>
+    <% if @category.errors.any? %>
       <ul>
         <% @category.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
+    <% end %>
+    <p class="field">
+      <div class="form-group field">
+        <label>CODE:</label>
+        <%= f.text_field :code, :class=>"form-control",  :placeholder=>"code" %>
+      </div>
+    </p>
+    <p class="field">
+      <div class="form-group field">
+        <label>NAME:</label>
+        <%= f.text_field :name, :class=>"form-control",  :placeholder=>"name" %>
+      </div>
+    </p>
+    <div id="sub_categories">
+      <%= f.fields_for :sub_categories do |category_fields| %>
+        <%= render partial: 'sub_category_fields', locals: { f: category_fields } %>
+      <% end %>
+      <%= link_to_add_association 'Add sub-category', f, :sub_categories %>
+    </div>
+    <p>
+      <%= f.submit "submit", :OnClick =>'validateForm()',:class=>'btn btn-success' %>
+    </p>
   <% end %>
-  <p>
-    <%= f.label :code %><br>
-    <%= f.text_field :code %>
-  </p>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-     <%=f.button :submit, :type=>'button', :OnClick =>'validateForm()' %>
 
-  </p>
-<% end %>
- <script>
-function validateForm(){
-    var name = $('#category_name').val();
-    var code = $('#category_code').val();
-    flag = 0;
-    $("#error").html (' ');
-    if (name.length <=3 ){
-      $("#error").append("<br>* Name is too short (minimum is 3 characters) ");
-      flag = 1;
+  <%= link_to 'Back', categories_path %>
+  <script>
+    function validateForm(){
+      var name = $('#category_name').val();
+      var code = $('#category_code').val();
+      flag = 0;
+      $("#error").html (' ');
+      if (name.length <=3 ){
+        $("#error").append("<br>* Name is too short (minimum is 3 characters) ");
+        flag = 1;
+      }
+      if (code.length <=3 ){
+        $("#error").append("<br>* Code is too short (minimum is 3 characters) ");
+        flag = 1;
+      }
+      if (flag == 0)
+        $("#new_category").submit();
+
+
     }
-    if (code.length <=3 ){
-      $("#error").append("<br>* Code is too short (minimum is 3 characters) ");
-      flag = 1;
-    }
-    if (flag == 0)
-      $("#new_category").submit();
-
-
-  }
-</script>
+  </script>
 </div>

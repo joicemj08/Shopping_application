@@ -1,21 +1,29 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   def show
     @user = User.find(params[:id])
-    redirect_to home_index_path unless current_user.id == @user.id
+    redirect_to home_index_path unless current_user.id == @user.id || (current_user.manager? || current_user.admin?)
   end
 
   def index
-    #if current_user.manager?
-     # @users = User.order("first_name").page(params[:page])
-    #else
+    if current_user.manager? || current_user.admin?
+      @users = User.order("first_name").page(params[:page])
+    else
       flash[:notice] = NOT_AUTHORIZED
       redirect_to home_index_path
-    #end
+    end
   end
 
   def create
-    @user = User.new(params[:id])
-
+    if current_user.manager? || current_user.admin?
+      @user = User.new(user_params)
+      if @user.save
+        redirect_to @user
+      end
+    else
+      flash[:notice] = NOT_AUTHORIZED
+      redirect_to home_index_path
+    end
   end
 
   def edit
@@ -23,7 +31,18 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    if current_user.manager? || current_user.admin?
+      @user = User.new
+    else
+      flash[:notice] = NOT_AUTHORIZED
+      redirect_to home_index_path
+    end
+  end
+
+   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to users_path
   end
 
   def update
@@ -32,6 +51,8 @@ class UsersController < ApplicationController
       redirect_to @user
     end
   end
+
+  private
 
   def user_params
     params.require(:user).permit(:email, :first_name, :last_name, :avatar)

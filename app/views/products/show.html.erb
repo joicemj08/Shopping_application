@@ -29,7 +29,7 @@
     </tr>
     <% @offers.each_with_index do |offer, index| %>
     <tr>
-        <td><%= offer.description %></td>
+        <td><%= offer.description.html_safe %></td>
     </tr>
     <% end %>
 </table>

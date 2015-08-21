@@ -11,6 +11,8 @@
  * file per style scope.
  *= require font-awesome
  *= require_self
+ *= require bootstrap-modal-bs3patch
+ *= require bootstrap-modal
  *= require_tree .
 
  */

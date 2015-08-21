@@ -3,7 +3,7 @@ Rails.application.config.assets.precompile += %w( rails.validations.js )
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 
-Rails.application.config.assets.precompile += %w( products.js )
+Rails.application.config.assets.precompile += %w( products.js autocomplete-rails.js )
 Rails.application.config.assets.precompile += %w( style_home.css )
 Rails.application.config.assets.precompile += %w( home.js )
 Rails.application.config.assets.precompile += %w( home.css )

@@ -1,4 +1,5 @@
 class OffersController < ApplicationController
+   before_action :authenticate_user!
   def show
     @offer = Offer.find(params[:id])
     @product = @offer.product
@@ -15,6 +16,15 @@ class OffersController < ApplicationController
 
   def edit
     @offer = Offer.find(params[:id])
+  end
+
+  def update
+    @offer = Offer.find(params[:id])
+    if @offer.update(offer_params)
+      redirect_to @offer
+    else
+      render 'edit'
+    end
   end
 
   def create

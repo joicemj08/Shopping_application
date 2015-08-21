@@ -6,10 +6,14 @@ class Product < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   def self.search(search)
     if search
-      self.joins(:category)
-        .where("categories.name like ? OR products.name like ? " , "#{search}%" , "#{search}%")
+      #self.joins(:category)
+        #.where("categories.name like ? OR products.name like ? " , "#{search}%" , "#{search}%")
+         where("name like ?", "#{search}%")
     else
       all
     end
+  end
+  def avatar_url
+    avatar.url(:thumb)
   end
 end
