@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :sessions => "sessions", registrations: "registrations" }
   resources :categories, defaults: {format: :html}
   resources :products, defaults: {format: :html}
-  resources :users, as: :user_profile
+  resources :users
   resources :home, defaults: {format: :html}
   resources :offers
   resources :dashboard
