@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :controllers => { :sessions => "sessions", registrations: "registrations" }
+  devise_for :users, :controllers => { :sessions => "sessions", registrations: "registrations", confirmations: "confirmations"  }
   resources :categories, defaults: {format: :html}
   resources :products, defaults: {format: :html}
-  resources :users
+  devise_scope :user do
+    get '/confirmation' =>'confirmations#show'
+end
+
+  resources :users do
+    post :create_user, on: :collection
+  end
+
   resources :home, defaults: {format: :html}
   resources :offers
   resources :dashboard
@@ -29,6 +36,8 @@ Rails.application.routes.draw do
   get '/search' => 'categories#search'
   get '/index' => 'home#index'
   get '/search_index' => 'products#search'
+  get '/validate' => 'users#check'
+  get '/confirmation' =>'confirmations#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

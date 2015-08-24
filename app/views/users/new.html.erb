@@ -2,22 +2,47 @@
   <h2>USERS</h2>
 </div>
 <div class="thumbnail" style="padding:20px">
-<%= form_for (@user, url: new_user_profile_path, method: :post) do |f| %>
-  <p>
-    <%= f.label :First_Name %><br>
-    <%= f.text_field :first_name %>
-  </p>
-  <p>
-    <%= f.label :Last_Name %><br>
-    <%= f.text_field :last_name %>
-  </p>
-   <p>
-    <%= f.label :Email %><br>
-    <%= f.text_field :email %>
-  </p>
+  <div id="error"></div>
 
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+  <%= form_for @user, url: create_user_users_path do |f| %>
+    <p>
+      <%= f.label :First_Name %><br>
+      <%= f.text_field :first_name %>
+    </p>
+    <p>
+      <%= f.label :Last_Name %><br>
+      <%= f.text_field :last_name %>
+    </p>
+     <p>
+      <%= f.label :Email %><br>
+      <%= f.text_field :email %>
+    </p>
+
+    <p>
+      <%= f.submit :id =>"submit_button", :class=>'btn btn-success' %>
+    </p>
+  <% end %>
+<script>
+$(function () {
+
+    $("#submit_button").click(function() {
+      var email =  $("#user_email").val();
+        $.ajax({
+            url: '/validate',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+            'search': email
+            },
+            success: function(data){
+              if (!data)
+               $("#new_user").submit();
+              else
+                $('#error').html("* email already exists");
+            }
+        });
+        return false;
+    });
+});
+</script>
 </div>

@@ -2,7 +2,7 @@
 <div class="row" style = "text-align: center;" >
 <h2>USERS</h2>
 </div>
-<%= link_to 'ADD USER', new_user_profile_path, :class=>'btn btn-success'%>
+<%= link_to 'ADD USER', new_user_path, :class=>'btn btn-success'%>
 <table class="table table-bordered">
 <thead>
     <tr>
@@ -20,9 +20,9 @@
             <td><%= user.last_name %></td>
             <td><%= user.email %></td>
             <td><%= user.role %></td>
-            <td><%= link_to 'Show', user_profile_path(user) %>
-                <%= link_to 'Edit', edit_users_path(user), :style=>"padding:10px;" %>
-                <%= link_to 'Destroy', users_path(user),:style=>"padding:10px;",
+            <td><%= link_to 'Show', users_path(user) %>
+                <%= link_to 'Edit', edit_user_path(user), :style=>"padding:10px;" %>
+                <%= link_to 'Destroy', user_path(user),:style=>"padding:10px;",
                     method: :delete,
                     data: { confirm: 'Are you sure?' } %></td>
         </tr>

@@ -14,10 +14,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def create
+  def create_user
     if current_user.manager? || current_user.admin?
       @user = User.new(user_params)
-      if @user.save
+      if @user.update_without_password(user_params)
         redirect_to @user
       end
     else
@@ -50,6 +50,13 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to @user
     end
+  end
+
+  def check
+    @user = User.find_by_email(params[:search])
+    render :json => @user.as_json()
+
+
   end
 
   private
