@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :products, defaults: {format: :html}
   devise_scope :user do
     get '/confirmation' =>'confirmations#show'
+    get '/validate' => 'registrations#create'
 end
 
   resources :users do
@@ -36,7 +37,7 @@ end
   get '/search' => 'categories#search'
   get '/index' => 'home#index'
   get '/search_index' => 'products#search'
-  get '/validate' => 'users#check'
+
   get '/confirmation' =>'confirmations#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
