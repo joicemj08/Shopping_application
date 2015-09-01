@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :sessions => "sessions", registrations: "registrations", confirmations: "confirmations"  }
   resources :categories, defaults: {format: :html}
   resources :products, defaults: {format: :html}
+  resources :cart
   devise_scope :user do
     get '/confirmation' =>'confirmations#show'
-    get '/validate' => 'registrations#create'
+    post '/validate' => 'registrations#create'
+
 end
 
   resources :users do
@@ -37,6 +39,9 @@ end
   get '/search' => 'categories#search'
   get '/index' => 'home#index'
   get '/search_index' => 'products#search'
+  get '/check' => 'users#check'
+  get '/add-cart' =>'products#add_to_cart'
+  get '/remove_cart' => 'products#remove_from_cart'
 
   get '/confirmation' =>'confirmations#show'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -3,8 +3,8 @@
   <%= link_to @offer.product.name, product_path(@offer.product_id) %>
 </p>
 <p>
-<strong>Description:</strong>
-<%= @offer.description.html_safe %>
+  <strong>Description:</strong>
+  <%= @offer.description.html_safe %>
 </p>
 <p>
   <%= image_tag @offer.avatar.url(:medium) %>

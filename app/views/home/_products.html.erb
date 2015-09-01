@@ -1,3 +1,4 @@
+
 <div id ="products-listing">
     <% @products.each do |product| %>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -16,15 +17,41 @@
               <p class="price">
                   <strong>Quantity Remaining :</strong> <%= product.quantity %><br>
               </p>
+              <strong> Select Quantity:</strong>
+            <%= number_field_tag 'quantity', nil, min: 1, max: product.quantity.to_i %>
+
             </p>
           </div>
           <div  class="button-group">
-            <button type="button" id="add-cart">
-                <i class="fa fa-shopping-cart"></i>
-                    <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span>
+            <button type="button" class="add-cart" product-id="<%= product.id %>">
+              Add to Cart
             </button>
+
           </div>
         </div>
+
       </div>
     <% end %>
 </div>
+<script type="text/javascript">
+$(function () {
+    $(".add-cart").click(function() {
+        var id = $(this).attr('product-id');
+
+        var quantity =  $("#quantity").val();
+        $.ajax({
+            url: '/add-cart',
+            type: 'GET',
+            data: {
+            'id': id
+            },
+            success: function(data){
+                $('#myModal1 .modal-body').html(data);
+            },
+            error: function(){
+              alert('Error');
+            }
+        });
+    });
+});
+</script>

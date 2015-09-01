@@ -1,48 +1,78 @@
-
+<%= javascript_include_tag "home.js" %>
 <% if flash[:notice] %>
-    <div class="notice" style= "color: red; margin-left:200px;"><%= flash[:notice] %></div>
+  <div class="notice" style= "color: red; margin-left:200px;"><%= flash[:notice] %></div>
 <% end %>
 <div class="container">
+  <div id="cart" class="btn-group btn-block add-cart">
+    <button type="button" data-loading-text="Loading..." class="btn btn-inverse btn-block btn-lg dropdown-toggle" style="width:200px;float:right;" data-toggle="modal" data-target="#myModal1"><i class="fa fa-shopping-cart"></i>
+      <span id="cart-total"></span>
+    </button>
+  <div id="myModal1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title1">Cart Menu</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-default">Checkout</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+    <ul class="dropdown-menu pull-right">
+      <li>
+        <p class="text-center">Your shopping cart is empty!</p>
+      </li>
+    </ul>
+  </div>
   <nav id="menu" class="navbar">
     <div class="navbar-header pull-right">
-        <span id="category" class="visible">
-            <%= form_tag home_index_path, :method => 'get', :id =>"products_search", style: "padding: 2px" do %>
-            <div class="col-lg-6">
-                <div class="input-group" style = "width: 250%">
-                  <div class="ui-widget">
-                   <%= text_field_tag :search, params[:search], :id =>"search_text", :placeholder=>"search", :class=>"form-control" %>
-                  </div>
-                </div><!-- /input-group -->
-            </div>
-            <% end %>
-        </span>
-        <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-          <i class="fa fa-bars"></i>
-        </button>
+      <span id="category" class="visible">
+        <%= form_tag home_index_path, :method => 'get', :id =>"products_search", style: "padding: 2px" do %>
+          <div class="col-lg-6">
+            <div class="input-group" style = "width: 250%">
+              <div class="ui-widget">
+               <%= text_field_tag :search, params[:search], :id =>"search_text", :placeholder=>"search", :class=>"form-control" %>
+              </div>
+            </div><!-- /input-group -->
+          </div>
+        <% end %>
+      </span>
+      <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
     </div>
   </nav>
 </div>
 <div class="container">
   <div class="row">
-      <div id="content" class="col-sm-12">
-          <div id="slideshow0" class="flexslider">
-              <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                <ul class="slides" style="width: 100%; -webkit-transition-duration: 0.6s; transition-duration: 0.6s; -webkit-transform: translate3d(0px, 0px, 0px);">
-                  <li style="width: 1132px; float: left; display: block;">
-                    <img src="http://demo.opencart.com/image/cache/catalog/demo/banners/MacBookAir-1140x380.jpg" alt="MacBookAir" class="img-responsive" draggable="false">
-                  </li>
-                  <li style="width: 1132px; float: left; display: block;">
-                      <img src="http://demo.opencart.com/image/cache/catalog/demo/banners/iPhone6-1140x380.jpg" alt="iPhone 6" class="img-responsive" draggable="false">
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="row product-layout">
-               <%= render partial: 'products' %>
-            </div>
-          </div>
+    <div id="content" class="col-sm-12">
+      <div id="slideshow0" class="flexslider">
+        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+          <ul class="slides" style="width: 100%; -webkit-transition-duration: 0.6s; transition-duration: 0.6s; -webkit-transform: translate3d(0px, 0px, 0px);">
+            <li style="width: 1132px; float: left; display: block;">
+              <img src="http://demo.opencart.com/image/cache/catalog/demo/banners/MacBookAir-1140x380.jpg" alt="MacBookAir" class="img-responsive" draggable="false">
+            </li>
+            <li style="width: 1132px; float: left; display: block;">
+                <img src="http://demo.opencart.com/image/cache/catalog/demo/banners/iPhone6-1140x380.jpg" alt="iPhone 6" class="img-responsive" draggable="false">
+            </li>
+          </ul>
         </div>
       </div>
+      <div class="row product-layout">
+        <%= render partial: 'products' %>
+      </div>
+    </div>
+  </div>
+</div>
 <style>
   .ui-autocomplete-category {
     font-weight: bold;
@@ -50,111 +80,90 @@
     margin: .8em 0 .2em;
     line-height: 1.5;
   }
-  </style>
+</style>
 <script>
-  $.widget( "custom.catcomplete", $.ui.autocomplete, {
+$.widget( "custom.catcomplete", $.ui.autocomplete,{
     _create: function() {
-      this._super();
-      this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+        this._super();
+        this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
     },
     _renderMenu: function( ul, items ) {
-      var that = this,
+        var that = this,
         currentCategory = "";
-      $.each( items, function( index, item ) {
-        var li;
-        if ( item.category != currentCategory ) {
-          ul.append( "<li class='autocompleltelist ui-autocomplete-category drop-down'>" + item.category + "</li>" );
-          currentCategory = item.category;
-        }
-        li = that._renderItemData( ul, item );
-        if ( item.category ) {
-          li.attr( "aria-label", item.category + " : " + item.label );
-          li.attr( "data-id", item.id );
-          li.attr( "data-category", item.category );
-          li.attr( "class", 'autocompletelist')
-
-        }
-      });
+        $.each( items, function( index, item ) {
+            var li;
+            if ( item.category != currentCategory ) {
+                ul.append( "<li class='autocompleltelist ui-autocomplete-category drop-down'>" + item.category + "</li>" );
+                currentCategory = item.category;
+            }
+            li = that._renderItemData( ul, item );
+            if ( item.category ) {
+                li.attr( "aria-label", item.category + " : " + item.label );
+                li.attr( "data-id", item.id );
+                li.attr( "data-category", item.category );
+                li.attr( "class", 'autocompletelist')
+            }
+        });
     }
-  });
-
-  </script>
-<script>
-    $(window).load(function() {
-        $('.flexslider').flexslider();
-        $('.flex-next, .flex-prev').empty();
-    });
-    $(function () {
-      $(".ui-autocomplete-category").on('click', function() {
-        alert(1);
-      });
-      $("#search_text").on('keyup', function() {
-        // var search_content =$("#search_text").val();
-
-        $( "#search_text" ).catcomplete({
-          delay: 0,
-          select: function (e, ui) {
-            $.ajax({
-            url: '/search_index',
-            type: 'GET',
-            dataType: 'json',
-              data: {
-                'id': ui.item.id,
-                'category' : ui.item.category
-              },
-
-            success: function(data){
-              var length = data.length;
-              var products = "";
-              for(var i=0; i<length; i++){
-                products += '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="product-thumb transition" style="height: 250px; overflow:hidden;" >' +
-                '<div class="image">' + '<img src="' + data[i].avatar_url + '">' + '</div>' +
-                '<div class="caption"><h4>' + data[i].name + '<br></h4><p><strong>Category :</strong>'
-                + data[i].category_name + '<br><p class="price">' +
-                '<strong>Price :</strong>' + data[i].unit_price + '<br></p><p class="price">' +
-                '<strong>Quantity Remaining :</strong>' + data[i].quantity +'<br></p></p></div></div></div>';
-              }
-              $('#products-listing').html(products);
-            }
-        });
-        },
-          source: function (request, response) {
-            $.ajax({
-              url: '/index',
-              type: 'GET',
-              dataType: 'json',
-              data: {
-              'search': $("#search_text").val()
-              },
-              success: function(data){
-                response(data.products);
-                    // $('#product-layout').html(data.html_string);
-              }
-            });
-          }
-        });
-        // return false;
-      });
-    });
-</script>
-<script>
-$(function () {
-    $("#add-cart").click(function() {
-        var product_id = $("").val();
-        $.ajax({
-            url: '/products.json',
-            type: 'GET',
-            dataType: 'json',
-            data: {
-            'search': search_content
-            },
-            success: function(data){
-                $('#products_div').html(data.html_string);
-            }
-        });
-        return false;
-    });
 });
 </script>
+<script>
+$(window).load(function() {
+    $('.flexslider').flexslider();
+    $('.flex-next, .flex-prev').empty();
+});
+$(function () {
+    $(".ui-autocomplete-category").on('click', function() {
+        alert(1);
+    });
+    $("#search_text").on('keyup', function() {
+    // var search_content =$("#search_text").val();
+        $( "#search_text" ).catcomplete({
+            delay: 0,
+            select: function (e, ui) {
+                $.ajax({
+                    url: '/search_index',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        'id': ui.item.id,
+                        'category' : ui.item.category
+                    },
+                    success: function(data){
+                        var length = data.length;
+                        var products = "";
+                        for(var i=0; i<length; i++){
+                            products += '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="product-thumb transition" style="height: 250px; overflow:hidden;" >' +
+                            '<div class="image">' + '<img src="' + data[i].avatar_url + '">' + '</div>' +
+                            '<div class="caption"><h4>' + data[i].name + '<br></h4><p><strong>Category :</strong>'
+                            + data[i].category_name + '<br><p class="price">' +
+                            '<strong>Price :</strong>' + data[i].unit_price + '<br></p><p class="price">' +
+                            '<strong>Quantity Remaining :</strong>' + data[i].quantity +'<br></p></p></div></div></div>';
+                        }
+                        $('#products-listing').html(products);
+                    }
+                });
+            },
+            source: function (request, response) {
+                $.ajax({
+                    url: '/index',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                    'search': $("#search_text").val()
+                    },
+                    success: function(data){
+                      response(data.products);
+                          // $('#product-layout').html(data.html_string);
+                    }
+                });
+            }
+        });
+    // return false;
+    });
+});
+
+</script>
+
 
 

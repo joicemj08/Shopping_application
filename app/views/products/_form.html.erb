@@ -1,75 +1,38 @@
+<%= javascript_include_tag "products.js" %>
 <div class="thumbnail" style="padding:20px">
   <h2>PRODUCTS</h2>
   <div id="error"></div>
-<%= form_for(@product) do |f| %>
- <p>
-    <div class="form-group field">
-      <label>NAME:</label>
-      <%= f.text_field :name, :class=>"form-control",  :placeholder=>"name" %>
-    </div>
-  </p>
-
-  <p>
-    <div class="form-group field">
-      <%= f.label :CategoryID %><br>
-      <%= f.collection_select(:category_id, Category.all, :id, :name) %>
-     </div>
-  </p>
-  <p>
-   <div class="form-group field">
-      <label>UNIT PRICE:</label><br>
-      <%= f.text_field :unit_price, :class=>"form-control",  :placeholder=>"unit price" %>
-    </div>
-  </p>
-  <p>
-    <div class="form-group field">
-      <label>QUANTITY:</label><br>
-      <%= f.text_field :quantity, :class=>"form-control",  :placeholder=>"quantity" %>
-    </div>
-  </p>
-  <p>
-      <strong>Add photo</strong>
-      <%= f.file_field :avatar %>
+  <%= form_for(@product) do |f| %>
+    <p>
+      <div class="form-group field">
+        <label>NAME:</label>
+        <%= f.text_field :name, :class=>"form-control",  :placeholder=>"name" %>
+      </div>
     </p>
-  <p>
-    <%=f.submit "submit", :OnClick =>'validateForm()', :class=>'btn btn-success'%>
-
-  </p>
-<% end %>
- <script>
-function validateForm(){
-    var name = $('#product_name').val();
-    var unitprice = $('#product_unit_price').val();
-    var quantity = $('#product_quantity').val();
-    var check_unitprice = isNaN(unitprice)
-    var check_quantity = isNaN(quantity)
-    flag = 0;
-    $("#error").html (' ');
-    if (name.length <=3 ){
-
-      $("#error").append("<br>* Code is too short (minimum is 3 characters) ");
-      flag = 1;
-    }
-    if (check_unitprice){
-      $("#error").append("<br>* Unit price should be a number");
-      flag = 1;
-    }
-    else if(unitprice.length == 0){
-      $("#error").append("<br>* Unit price shoud not be blank");
-       flag = 1;
-    }
-    if (check_quantity){
-      $("#error").append("<br>* Quantity should be a number");
-       flag = 1;
-    }
-    else if (quantity.length == 0){
-      $("#error").append("<br>* Quantity shoud not be blank");
-       flag = 1;
-    }
-    if (flag == 0)
-      $("#new_product").submit();
-
-
-  }
-</script>
+    <p>
+      <div class="form-group field">
+        <%= f.label :CategoryID %><br>
+        <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+       </div>
+    </p>
+    <p>
+     <div class="form-group field">
+        <label>UNIT PRICE:</label><br>
+        <%= f.text_field :unit_price, :class=>"form-control",  :placeholder=>"unit price" %>
+      </div>
+    </p>
+    <p>
+      <div class="form-group field">
+        <label>QUANTITY:</label><br>
+        <%= f.text_field :quantity, :class=>"form-control",  :placeholder=>"quantity" %>
+      </div>
+    </p>
+    <p>
+        <strong>Add photo</strong>
+        <%= f.file_field :avatar %>
+      </p>
+    <p>
+      <%=f.button "submit", type: 'button', :OnClick =>'validateForm()', :class=>'btn btn-success'%>
+    </p>
+  <% end %>
 </div>

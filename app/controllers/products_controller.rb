@@ -4,7 +4,7 @@
 # @author [Joice]
 #
 class ProductsController < ApplicationController
-  before_action :authenticate_user!,except: :search
+  before_action :authenticate_user!, except: [:search, :add_to_cart, :remove_from_cart]
   # GET#show - /products/:id
   def show
     @product = Product.find(params[:id])
@@ -63,6 +63,21 @@ class ProductsController < ApplicationController
       @products = Product.select("products.*, categories.name AS category_name").joins(:category).where(id: params[:id])
     end
     render :json => @products.as_json(methods: :avatar_url)
+  end
+
+  def add_to_cart
+    p params[:id]
+
+    session[:cart] = [] if session[:cart].nil?
+
+    session[:cart] << { product: Product.find(params[:id]), quantity: params[:quantity] }
+
+    p session[:cart]
+    render :partial => 'home/addcart'
+  end
+
+  def remove_from_cart
+    p params[:product]
   end
 
   private

@@ -16,13 +16,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if current_user.normal_user?
-      session[:previous_url] || root_path
-    else
-      dashboard_index_path
-    end
+    #set page to display after sign in
+    dashboard_index_path
   end
+
   def after_sign_up_path_for(resource)
+    #set page to display after sign up
     '/home'
   end
 end

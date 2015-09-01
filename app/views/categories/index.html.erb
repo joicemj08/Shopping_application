@@ -1,3 +1,4 @@
+<%= javascript_include_tag "categories.js" %>
 <div class="row" style = "text-align: center;" >
   <h2>CATEGORIES</h2>
 </div>
@@ -22,34 +23,4 @@
           <li> <%= paginate @categories, :window => 2 %></li>
         </ul>
     </div>
-  <script>
-  $(function () {
-    $("#search_button").click(function() {
-        var search_content = $("#text").val();
-        $.ajax({
-          url: '/search',
-          method: 'GET',
-          dataType: 'json',
-          data: {
-            'search': search_content
-          },
-          success: function(data){
-            var length = data.length;
-            var categories = "";
-            for(var i=0; i<length; i++){
-              categories += '<tr><td>' + data[i].code + '</td>' +
-                            '<td>' + data[i].name + '</td>' +
-                            '<td><a href="/categories/' + data[i].id + '">Show</a></td>' +
-                            '<td><a href="/categories/'+ data[i].id +'">Edit</a></td>'+
-                            '<td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete"'+
-                            ' href="/categories/' + data[i].id + '">Destroy</a></td></tr>';
-            }
-            $('#categories-tbody').html(categories);
-          }
-        });
-        return false;
-      });
-  });
-</script>
-
 </div>

@@ -6,8 +6,8 @@ class HomeController < ApplicationController
     @offers = Offer.all
     @products = Product.search(params[:search])
     @categories = Category.search(params[:search])
-    search_list =  @categories.map { |category| {:label => category.name, :category => "Categories",:id =>category.id  }}
-    search_list = search_list + @products.map { |product| {:label => product.name, :category => "Products",:id =>product.id} }
+    search_list =  @categories.map { |category| {label: category.name, category: "Categories", id: category.id  }}
+    search_list = search_list + @products.map { |product| {label: product.name, category: "Products", id: product.id} }
     respond_to do |format|
       format.html
       format.json do

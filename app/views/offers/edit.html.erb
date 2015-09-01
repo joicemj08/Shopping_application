@@ -1,3 +1,4 @@
+<%= javascript_include_tag "offer.js" %>
 <div id="error"></div>
 <%= form_for(@offer) do |f| %>
 
@@ -11,22 +12,6 @@
   <strong>Add offer image</strong><br>
   <%= f.file_field :avatar %><br>
 
-  <%=f.submit :OnClick =>'validateForm()' %>
+  <%=f.button :submit, :type=>'button', :OnClick =>'validateForm()' %>
 
 <% end %>
-
- <script>
-function validateForm(){
-    var offer = $('#offer_avatar').val();
-    flag = 0;
-    $("#error").html (' ');
-    if (offer.length == "" ){
-      $("#error").append("<br>* Image is mandatory ");
-      flag = 1;
-    }
-    if (flag == 0)
-      $("#new_offer").submit();
-
-
-  }
-</script>

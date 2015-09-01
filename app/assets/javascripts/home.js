@@ -17,5 +17,27 @@
 //= require bootstrap.min
 //= require jquery.flexslider-min
 
-
-
+$(function () {
+    $("#signup").click(function() {
+        $.ajax({
+            url: '/validate',
+            type: 'POST',
+            dataType: 'json',
+            data: $("#new_user").serialize(),
+            success: function(data){
+                if(data.success == true){
+                    alert("you have successfully registered.You will recieve a confirmation mail soon");
+                    $('#myModal').modal('toggle');
+                }
+                var errors = "";
+                for(var i=0; i<data.error.length; i++){
+                    errors += '<br>*'+ data.error[i] ;
+                }
+                $('#error').html(errors);
+            }
+        });
+    });
+    $('.modal').on('hidden.bs.modal', function(){
+        $(this).find('form')[0].reset();
+    });
+});

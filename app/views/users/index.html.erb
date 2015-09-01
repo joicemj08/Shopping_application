@@ -4,30 +4,30 @@
 </div>
 <%= link_to 'ADD USER', new_user_path, :class=>'btn btn-success'%>
 <table class="table table-bordered">
-<thead>
+  <thead>
     <tr>
-        <th>FIRST NAME</th>
-        <th>LAST NAME</th>
-        <th>EMAIL</th>
-        <th>ROLE</th>
-        <th style="width: 250px;"></th>
+      <th>FIRST NAME</th>
+      <th>LAST NAME</th>
+      <th>EMAIL</th>
+      <th>ROLE</th>
+      <th style="width: 250px;"></th>
     </tr>
-</thead>
-<tbody id="users-tbody">
+  </thead>
+  <tbody id="users-tbody">
     <% @users.each do |user| %>
-        <tr>
-            <td><%= user.first_name %></td>
-            <td><%= user.last_name %></td>
-            <td><%= user.email %></td>
-            <td><%= user.role %></td>
-            <td><%= link_to 'Show', users_path(user) %>
-                <%= link_to 'Edit', edit_user_path(user), :style=>"padding:10px;" %>
-                <%= link_to 'Destroy', user_path(user),:style=>"padding:10px;",
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %></td>
-        </tr>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <td><%= link_to 'Show', users_path(user) %>
+          <%= link_to 'Edit', edit_user_path(user), :style=>"padding:10px;" %>
+          <%= link_to 'Destroy', user_path(user),:style=>"padding:10px;",
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+      </tr>
     <% end %>
-</tbody>
+  </tbody>
 </table>
 <div class="pagination">
 <ul>

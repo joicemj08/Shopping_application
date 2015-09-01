@@ -1,0 +1,27 @@
+<div class='add-cart'>
+  <% total = 0 %>
+  <% items = session[:cart] %>
+  <table class="table table-bordered cart-table">
+    <tr>
+      <th>PRODUCT NAME</th>
+      <th>CATEGORY NAME</th>
+      <th>UNIT PRICE</th>
+      <th>SELECT QUANITY</th>
+      <th>AMOUNT</th>
+    </tr>
+     <tr>
+    <% items.each_with_index do |item, index| %>
+      <% if item.present? %>
+          <td><%= item[:product].name %></td>
+          <td><%= item[:product].category.name %></td>
+          <td><%= item[:product].unit_price %></td>
+
+          <td><%= item[:product].unit_price * 1 %></td>
+          <td><%= link_to 'remove item', remove_cart_path(item[:product]) %>
+
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+  <strong>Total amount: <%= total %></strong>
+</div>
