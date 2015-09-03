@@ -11,7 +11,7 @@ module ApplicationHelper
     if current_user.manager? || current_user.admin?
       pages = ['dashboard', 'home', 'products', 'categories', 'users', 'offers']
     else
-      pages = ['dashboard', 'home','products', 'categories']
+      pages = ['dashboard', 'home',]
     end
 
     pages.include?(page_name)

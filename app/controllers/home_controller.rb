@@ -18,6 +18,8 @@ class HomeController < ApplicationController
     end
   end
 
+
+
   def show
     @products = Product.all
   end

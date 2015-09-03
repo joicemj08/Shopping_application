@@ -13,14 +13,19 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.search(params[:search]).page(params[:page])
-    respond_to do |format|
-      format.html #{ render html: @products }# index.html.erb
-      format.json do
-        html_string = render_to_string(
-          'products/_products.html.erb', format: [:html], layout: false)
-          render json: { html_string: html_string, products: @products }
+    if current_user.manager? || current_user.admin?
+      @products = Product.search(params[:search]).page(params[:page])
+      respond_to do |format|
+        format.html #{ render html: @products }# index.html.erb
+        format.json do
+          html_string = render_to_string(
+            'products/_products.html.erb', format: [:html], layout: false)
+            render json: { html_string: html_string, products: @products }
+        end
       end
+    else
+      flash[:notice] = NOT_AUTHORIZED
+      redirect_to home_index_path
     end
   end
 
@@ -66,18 +71,27 @@ class ProductsController < ApplicationController
   end
 
   def add_to_cart
-    p params[:id]
-
-    session[:cart] = [] if session[:cart].nil?
-
-    session[:cart] << { product: Product.find(params[:id]), quantity: params[:quantity] }
-
+    session[:cart] = []  if session[:cart].nil?
+    session[:cart] << {
+      'product_id' => params[:id],\
+      'quantity' => params[:quantity]
+    }
     p session[:cart]
+    @products  =  Product.where(id: session[:cart].map { |obj| obj['product_id'] })
+    @quantities = session[:cart].map { |obj| obj['quantity'] if (obj['quantity'] != 'nil') }.compact
     render :partial => 'home/addcart'
   end
 
   def remove_from_cart
-    p params[:product]
+    p params[:index]
+    position = session[:cart].find{|h| h['product_id'] == params[:index] }
+    index = session[:cart].index(position)
+    session[:cart].delete_at(index.to_i)
+    @products  =  Product.where(id: session[:cart].map { |obj| obj['product_id'] })
+    @quantities = session[:cart].map { |obj| obj['quantity'] if (obj['quantity'] != 'nil') }.compact
+    p @quantities
+    render :partial => 'home/addcart'
+
   end
 
   private

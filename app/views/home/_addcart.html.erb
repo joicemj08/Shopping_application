@@ -6,19 +6,20 @@
       <th>PRODUCT NAME</th>
       <th>CATEGORY NAME</th>
       <th>UNIT PRICE</th>
-      <th>SELECT QUANITY</th>
-      <th>AMOUNT</th>
+      <th>QUANITY</th>
+      <th>TOTAL</th>
+      <th>REMOVE</th>
     </tr>
      <tr>
-    <% items.each_with_index do |item, index| %>
+    <% @products.each_with_index do |item, index| %>
       <% if item.present? %>
-          <td><%= item[:product].name %></td>
-          <td><%= item[:product].category.name %></td>
-          <td><%= item[:product].unit_price %></td>
-
-          <td><%= item[:product].unit_price * 1 %></td>
-          <td><%= link_to 'remove item', remove_cart_path(item[:product]) %>
-
+          <td><%= item.name %></td>
+          <td><%= item.category.name %></td>
+          <td><%= item.unit_price.to_i %></td>
+          <td><%= @quantities[index] %></td>
+          <td><%= item.unit_price.to_i * @quantities[index].to_i %></td>
+          <td><%= link_to 'remove item', remove_cart_path(index: item) %>
+          <% total += item.unit_price.to_i * @quantities[index].to_i %>
         </tr>
       <% end %>
     <% end %>

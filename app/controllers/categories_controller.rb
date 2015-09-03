@@ -7,7 +7,12 @@ class CategoriesController < ApplicationController
    before_action :authenticate_user!
    # GET  /categories
   def index
-    @categories = Category.order("name").page(params[:page])
+    if current_user.manager? || current_user.admin?
+      @categories = Category.order("name").page(params[:page])
+    else
+      flash[:notice] = NOT_AUTHORIZED
+      redirect_to home_index_path
+    end
   end
   #GET  /search
   def search

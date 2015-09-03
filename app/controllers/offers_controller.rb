@@ -10,8 +10,13 @@ class OffersController < ApplicationController
   end
 
   def index
-    @offers = Offer.all
-    @product = @offers.product
+    if current_user.manager? || current_user.admin?
+      @offers = Offer.all
+      @product = @offers.product
+    else
+      flash[:notice] = NOT_AUTHORIZED
+      redirect_to home_index_path
+    end
   end
 
   def edit
