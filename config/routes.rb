@@ -42,6 +42,7 @@ end
   get '/check' => 'users#check'
   get '/add-cart' =>'products#add_to_cart'
   get '/remove_cart' => 'products#remove_from_cart'
+  get '/purchase' => 'products#purchase'
 
   get '/confirmation' =>'confirmations#show'
   # The priority is based upon order of creation: first created -> highest priority.

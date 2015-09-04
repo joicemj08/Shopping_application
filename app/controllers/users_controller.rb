@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       redirect_to home_index_path
     end
   end
-
+  # method to create new user by admin or manager
   def create_user
     if current_user.manager? || current_user.admin?
       @user = User.new(user_params)

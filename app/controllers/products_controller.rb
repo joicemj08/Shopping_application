@@ -4,7 +4,7 @@
 # @author [Joice]
 #
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: [:search, :add_to_cart, :remove_from_cart]
+  before_action :authenticate_user!, except: [:search, :add_to_cart, :remove_from_cart, :checkout]
   # GET#show - /products/:id
   def show
     @product = Product.find(params[:id])
@@ -60,7 +60,7 @@ class ProductsController < ApplicationController
     @product.destroy
     redirect_to products_path
   end
-
+  # method to search using autocomplete feature
   def search
     if(params[:category] == 'Categories')
       @products = Product.select("products.*, categories.name AS category_name").joins(:category).where(category_id: params[:id])
@@ -70,29 +70,49 @@ class ProductsController < ApplicationController
     render :json => @products.as_json(methods: :avatar_url)
   end
 
+  # method to add items to cart
   def add_to_cart
     session[:cart] = []  if session[:cart].nil?
-    session[:cart] << {
-      'product_id' => params[:id],\
-      'quantity' => params[:quantity]
-    }
-    p session[:cart]
-    @products  =  Product.where(id: session[:cart].map { |obj| obj['product_id'] })
-    @quantities = session[:cart].map { |obj| obj['quantity'] if (obj['quantity'] != 'nil') }.compact
+    if session[:cart].any?{ |h| h['product_id'] == params[:id] }
+       position = session[:cart].find{|i| i['product_id'] == params[:id] }
+       index = session[:cart].index(position)
+       session[:cart][index]['quantity'] = params[:quantity]
+    else
+      session[:cart] << {
+        'product_id' => params[:id],\
+        'quantity' => params[:quantity]
+      }
+      p session[:cart]
+    end
+    @cart_products  =  Product.where(id: session[:cart].map { |obj| obj['product_id'] })
+    @cart_quantities = session[:cart].map { |obj| obj['quantity'] }
     render :partial => 'home/addcart'
   end
 
+  # method to remove items from cart
   def remove_from_cart
     p params[:index]
     position = session[:cart].find{|h| h['product_id'] == params[:index] }
     index = session[:cart].index(position)
     session[:cart].delete_at(index.to_i)
-    @products  =  Product.where(id: session[:cart].map { |obj| obj['product_id'] })
-    @quantities = session[:cart].map { |obj| obj['quantity'] if (obj['quantity'] != 'nil') }.compact
-    p @quantities
+    @cart_products  =  Product.where(id: session[:cart].map { |obj| obj['product_id'] })
+    @cart_quantities = session[:cart].map { |obj| obj['quantity'] }
     render :partial => 'home/addcart'
-
   end
+  # method to purchase products
+  def purchase
+    session[:cart].each do |p|
+      product = Product.find(p['product_id'].to_i)
+      current_quantity = product.quantity
+      p "111111111111111"
+      p current_quantity
+      p qty = current_quantity.to_i - p['quantity'].to_i
+      product.update(:quantity => qty )
+    end
+    session[:cart] = nil
+    render:partial =>'home/checkout'
+  end
+
 
   private
 

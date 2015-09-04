@@ -5,7 +5,57 @@
   <nav id="top">
     <div class="container">
       <div class="row">
-      <div class="pull-left">
+        <div class="col-sm-2">
+          <h4>QUICK DEALS</h4>
+        </div>
+        <div class="col-sm-4">
+          <span id="category" class="visible">
+          <%= form_tag home_index_path, :method => 'get', :id =>"products_search", style: "padding: 2px" do %>
+            <div class="col-lg-6">
+              <div class="input-group" style = "width: 250%">
+                <div class="ui-widget">
+                  <%= text_field_tag :search, params[:search], :id =>"search_text", :placeholder=>"search", :class=>"form-control" %>
+                </div>
+              </div><!-- /input-group -->
+            </div>
+          <% end %>
+         </span>
+        </div>
+        <div class="col-sm-3">
+        <div id="cart" class="btn-group btn-block">
+          <button type="button" data-loading-text="Loading..." class="btn btn-inverse btn-block btn-lg dropdown-toggle" style="width:200px;float:right;" data-toggle="modal" data-target="#myModal1"><i class="fa fa-shopping-cart"></i>
+            <span id="cart-total"></span>
+          </button>
+          <!-- modal for cart -->
+          <div id="myModal1" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title1">Cart Menu</h4>
+                </div>
+                <div class="modal-body">
+                  <p>ur cart is empty</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- modal for checkout -->
+          <ul class="dropdown-menu pull-right">
+            <li>
+              <p class="text-center">Your shopping cart is empty!</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+       <div class="col-sm-3">
+          <div class="pull-left">
         <div class="btn-group">
         </div>
       </div>
@@ -21,7 +71,7 @@
               </li>
             <% else %>
               <li>
-                <button data-toggle="modal" data-target="#myModal">
+                <button class="btn btn-primary btn-primary" data-toggle="modal" data-target="#myModal">
                   Register
                 </button>
                 <div class="modal fade" id="myModal" role="dialog">
@@ -90,7 +140,7 @@
                 </div>
               </li>
               <li>
-                <button>
+                <button class="btn btn-primary btn-primary">
                   <%= link_to "Login", new_user_session_path %>
                 </button>
               </li>
@@ -98,56 +148,7 @@
           </li>
         </ul>
       </div>
-    </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <h4>QUICK DEALS</h4>
-        </div>
-        <div class="col-sm-4">
-          <span id="category" class="visible">
-          <%= form_tag home_index_path, :method => 'get', :id =>"products_search", style: "padding: 2px" do %>
-            <div class="col-lg-6">
-              <div class="input-group" style = "width: 250%">
-                <div class="ui-widget">
-                  <%= text_field_tag :search, params[:search], :id =>"search_text", :placeholder=>"search", :class=>"form-control" %>
-                </div>
-              </div><!-- /input-group -->
-            </div>
-          <% end %>
-         </span>
-        </div>
-        <div class="col-sm-4">
-        <div id="cart" class="btn-group btn-block">
-          <button type="button" data-loading-text="Loading..." class="btn btn-inverse btn-block btn-lg dropdown-toggle" style="width:200px;float:right;" data-toggle="modal" data-target="#myModal1"><i class="fa fa-shopping-cart"></i>
-            <span id="cart-total"></span>
-          </button>
-          <div id="myModal1" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title1">Cart Menu</h4>
-                </div>
-                <div class="modal-body">
-                  <p>Your shopping cart is empty!</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                   <button type="button" class="btn btn-default">Checkout</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <ul class="dropdown-menu pull-right">
-            <li>
-              <p class="text-center">Your shopping cart is empty!</p>
-            </li>
-          </ul>
-        </div>
-      </div>
+       </div>
     </div>
   </div>
 </nav>

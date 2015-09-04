@@ -1,13 +1,17 @@
+#
+# RegistrationsController -
+#
+# @author [Joice]
+#
 class RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_user!
-
   respond_to :json, :html
   def create
     user = User.new(user_params)
     if user.save
-      render json: {success: true, error: {} }
+      render json: { success: true, error: {} }
     else
-      render json: {success: false, error: user.errors.full_messages }
+      render json: { success: false, error: user.errors.full_messages }
     end
   end
 
@@ -23,6 +27,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
+  # permitted params for user
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end

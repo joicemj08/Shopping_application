@@ -1,4 +1,10 @@
 <div id = "mainWrap">
+  <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
 <div class = "container" style = "width:50%; text-align:center;">
   <div id="loggit">
         <h3>Please <strong>Login</strong> </h3>
@@ -46,5 +52,6 @@
         <% end %>
       </div>
   </div>
+</div>
 
 

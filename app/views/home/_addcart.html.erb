@@ -11,18 +11,58 @@
       <th>REMOVE</th>
     </tr>
      <tr>
-    <% @products.each_with_index do |item, index| %>
+    <% @cart_products.each_with_index do |item, index| %>
       <% if item.present? %>
-          <td><%= item.name %></td>
-          <td><%= item.category.name %></td>
-          <td><%= item.unit_price.to_i %></td>
-          <td><%= @quantities[index] %></td>
-          <td><%= item.unit_price.to_i * @quantities[index].to_i %></td>
-          <td><%= link_to 'remove item', remove_cart_path(index: item) %>
-          <% total += item.unit_price.to_i * @quantities[index].to_i %>
-        </tr>
+        <td><%= item.name %></td>
+        <td><%= item.category.name %></td>
+        <td><%= item.unit_price.to_i %></td>
+        <td><%= @cart_quantities[index] %></td>
+        <td><%= item.unit_price.to_i * @cart_quantities[index].to_i %></td>
+        <td><button type="button" class="btn btn-default remove" id="<%= item.id %>">Remove</button>
+        <% total += item.unit_price.to_i * @cart_quantities[index].to_i %>
+      </tr>
       <% end %>
     <% end %>
   </table>
   <strong>Total amount: <%= total %></strong>
+  <center><button type="button" class="btn btn-default checkout" data-toggle="modal" data-target="#myModal2">checkout</button></center>
 </div>
+
+<script type="text/javascript">
+    $(".remove").click(function() {
+        var id = $(this).attr('id');
+        alert(id);
+        $.ajax({
+            url: '/remove_cart',
+            type: 'GET',
+            data: {
+                'index': id,
+            },
+            success: function(data){
+                $('#myModal1 .modal-body').html(data);
+            },
+            error: function(){
+              alert('Error');
+            }
+        });
+    });
+
+    $(function () {
+    $(".checkout").click(function() {
+        $.ajax({
+            url: '/purchase',
+            type: 'GET',
+            success: function(data){
+                alert("u have successfully purchased");
+                $('#myModal1 .modal-body').html(data);
+            },
+            error: function(){
+              alert('Error');
+            }
+        });
+    });
+
+
+});
+
+</script>

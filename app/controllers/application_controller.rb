@@ -1,9 +1,14 @@
+#
+# Application Controller -
+#
+# @author [Joice]
+#
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.\
   before_filter :store_location
   protect_from_forgery with: :exception
-  #after_filter :store_location
+  # after_filter :store_location
 
   def store_location
     # store last url - needed for post-login redirect to whatever the user last visited.
@@ -16,12 +21,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    #set page to display after sign in
+    # set page to display after sign in
     dashboard_index_path
   end
 
   def after_sign_up_path_for(resource)
-    #set page to display after sign up
+    # set page to display after sign up
     '/home'
   end
 end

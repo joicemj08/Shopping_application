@@ -4,22 +4,23 @@
 # @author [Joice]
 #
 class CategoriesController < ApplicationController
-   before_action :authenticate_user!
-   # GET  /categories
+  before_action :authenticate_user!
+  # GET  /categories
   def index
     if current_user.manager? || current_user.admin?
-      @categories = Category.order("name").page(params[:page])
+      @categories = Category.order('name').page(params[:page])
     else
       flash[:notice] = NOT_AUTHORIZED
       redirect_to home_index_path
     end
   end
-  #GET  /search
+  # search categories
+  # GET  /search
   def search
     @categories = Category.search(params[:search])
-    render :json => @categories.as_json
+    render json: @categories.as_json
   end
-  #GET  /categories/:id
+  # GET  /categories/:id
   def show
     @category = Category.find(params[:id])
     @products = @category.products
@@ -32,7 +33,7 @@ class CategoriesController < ApplicationController
   def edit
     @category = Category.find(params[:id])
   end
-  #POST  /categories
+  # POST  /categories
   def create
     @category = Category.new(category_params)
     if @category.save
@@ -41,7 +42,7 @@ class CategoriesController < ApplicationController
       render 'new'
     end
   end
-  #PATCH  /categories/:id
+  # PATCH  /categories/:id
   def update
     @category = Category.find(params[:id])
     if @category.update(category_params)
@@ -50,7 +51,7 @@ class CategoriesController < ApplicationController
       render 'edit'
     end
   end
-  #DELETE /categories/:id
+  # DELETE /categories/:id
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
