@@ -4,7 +4,7 @@
     <th>CATEGORY NAME</th>
     <th>UNIT PRICE</th>
     <th>QUANTITY</th>
-    <th style="width: 250px;"></th>
+    <th class="table-width">OPERATIONS</th>
   </tr>
   <% @products.each do |product| %>
     <tr>
@@ -14,8 +14,8 @@
       <td><%= product.unit_price %></td>
       <td><%= product.quantity %></td>
       <td><%= link_to 'Show', product_path(product) %>
-      <%= link_to 'Edit', edit_product_path(product), :style=>"padding:10px;" %>
-      <%= link_to 'Destroy', product_path(product), :style=>"padding:10px;",
+      <%= link_to 'Edit', edit_product_path(product), class: "set-padding" %>
+      <%= link_to 'Destroy', product_path(product), class: "set-padding",
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
     </tr>

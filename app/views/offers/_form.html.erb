@@ -1,0 +1,17 @@
+<%= javascript_include_tag "offer.js" %>
+<div id="error"></div>
+<%= form_for(@offer) do |f| %>
+
+  <%= f.label :Product_name %><br>
+  <%= f.collection_select(:product_id, Product.all, :id, :name) %><br>
+
+  <%= f.label :Description %><br>
+  <%= f.text_area :description, :class => "tinymce", :rows => 4, :cols => 12 %><br>
+
+  <%= tinymce %>
+  <strong>Add offer image</strong><br>
+  <%= f.file_field :avatar %><br>
+
+  <%=f.button :submit, :type=>'button', :OnClick =>'validateForm()' %>
+
+<% end %>

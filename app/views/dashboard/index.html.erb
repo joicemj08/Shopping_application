@@ -1,7 +1,69 @@
 <html>
   <body>
-    <h4>dashboard</h4>
-    <h2>u are in dashborad...!!!</h2>
-
+    <div class ="row">
+      <div class="col-md-4 items-listing">
+          <div class="panel" style="width: 200px;background-color: #81C6E7;">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><%= @product %> </div>
+                        <div>Products</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left"><%= link_to'View Details' , products_path %></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+      </div>
+      <div class="col-md-4 items-listing">
+          <div class="panel" style="width: 200px;background-color: #81C6E7;">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><%= @categories %> </div>
+                        <div>Categories</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left"><%= link_to'View Details' , categories_path %></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+      </div>
+      <div class="col-md-4 items-listing">
+          <div class="panel" style="width: 200px;background-color: #81C6E7;">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><%= @users %> </div>
+                        <div>Users</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left"><%= link_to'View Details' , users_path %></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -12,9 +12,7 @@ function validateForm(){
         flag = 1;
       }
       if (flag == 0)
-        $("#new_category").submit();
-
-
+        $(".form-submit form").submit();
     }
 
 $(function () {

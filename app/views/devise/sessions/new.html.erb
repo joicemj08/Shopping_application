@@ -5,10 +5,10 @@
   <% if alert %>
     <p class="alert alert-danger"><%= alert %></p>
   <% end %>
-<div class = "container" style = "width:50%; text-align:center;">
-  <div id="loggit">
-        <h3>Please <strong>Login</strong> </h3>
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class = "container" style = "width:50%; text-align:center;">
+    <div id="loggit">
+      <h3>Please <strong>Login</strong> </h3>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <form action="#" id="logForm" method="post" class="form-horizontal">
           <div class="form-group" >
             <div class="col-xs-12" style="margin-bottom:15px;">
@@ -49,8 +49,8 @@
             </div>
           </div>
         </form>
-        <% end %>
-      </div>
+      <% end %>
+    </div>
   </div>
 </div>
 

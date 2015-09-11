@@ -1,8 +1,10 @@
-<div class='add-cart'>
+<%= javascript_include_tag "cart" %>
+<div class='cart1'>
   <% total = 0 %>
-  <% items = session[:cart] %>
+  <% if session[:cart].present? %>
   <table class="table table-bordered cart-table">
-    <tr>
+    <thead>
+      <tr style="font-size: 12px;">
       <th>PRODUCT NAME</th>
       <th>CATEGORY NAME</th>
       <th>UNIT PRICE</th>
@@ -10,28 +12,34 @@
       <th>TOTAL</th>
       <th>REMOVE</th>
     </tr>
-     <tr>
-    <% @cart_products.each_with_index do |item, index| %>
+    </thead>
+
+    <% @cart_products.each do |item| %>
       <% if item.present? %>
+      <tr class="cart-items">
         <td><%= item.name %></td>
         <td><%= item.category.name %></td>
         <td><%= item.unit_price.to_i %></td>
-        <td><%= @cart_quantities[index] %></td>
-        <td><%= item.unit_price.to_i * @cart_quantities[index].to_i %></td>
+        <% cart_item = session[:cart].find{|i| i['product_id'].to_i == item.id } %>
+        <% quanity = cart_item['quantity'] if cart_item.present? %>
+        <td><%= quanity %></td>
+        <td><%= item.unit_price.to_i * quanity.to_i %></td>
         <td><button type="button" class="btn btn-default remove" id="<%= item.id %>">Remove</button>
-        <% total += item.unit_price.to_i * @cart_quantities[index].to_i %>
+        <% total += item.unit_price.to_i * quanity.to_i %>
       </tr>
       <% end %>
     <% end %>
   </table>
   <strong>Total amount: <%= total %></strong>
-  <center><button type="button" class="btn btn-default checkout" data-toggle="modal" data-target="#myModal2">checkout</button></center>
+  <center><button type="button" class="btn btn-primary checkout">Purchase</button></center>
+   <% else %>
+  <p><center>Your cart is empty! </center></p>
+  <% end %>
 </div>
 
 <script type="text/javascript">
-    $(".remove").click(function() {
+$(".remove").click(function() {
         var id = $(this).attr('id');
-        alert(id);
         $.ajax({
             url: '/remove_cart',
             type: 'GET',
@@ -40,6 +48,8 @@
             },
             success: function(data){
                 $('#myModal1 .modal-body').html(data);
+                var count = $(".cart-items").length;
+                $('#cart-total').html(count);
             },
             error: function(){
               alert('Error');
@@ -53,16 +63,15 @@
             url: '/purchase',
             type: 'GET',
             success: function(data){
-                alert("u have successfully purchased");
                 $('#myModal1 .modal-body').html(data);
+                $('#cart-total').html(0);
             },
             error: function(){
               alert('Error');
             }
         });
     });
-
-
 });
+
 
 </script>

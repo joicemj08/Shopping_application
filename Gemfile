@@ -13,27 +13,27 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'bootstrap-sass', :git => 'https://github.com/twbs/bootstrap-sass.git', :branch => 'next'
+gem 'bootstrap-sass', git: 'https://github.com/twbs/bootstrap-sass.git', branch: 'next'
 
 gem 'autoprefixer-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-gem "jquery-ui-rails"
+gem 'jquery-ui-rails'
 gem 'rails3-jquery-autocomplete'
 gem 'rails4-autocomplete'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 gem 'therubyracer'
-gem 'flexslider', :git => 'https://github.com/constantm/Flexslider-2-Rails-Gem.git'
+gem 'flexslider', git: 'https://github.com/constantm/Flexslider-2-Rails-Gem.git'
 
 gem 'devise'
 # gem 'client_side_validations'
-gem "paperclip", "~> 4.3"
+gem 'paperclip', '~> 4.3'
 
 gem 'bootstrap-modal-rails'
 
-gem "cocoon"
+gem 'cocoon'
 
 gem 'less-rails-bootstrap', '~> 3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -43,8 +43,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'kaminari'
 
-gem 'tinymce-rails'
+gem 'roo'
+gem "iconv", "~> 1.0.3"
+gem 'roo-xls'
+gem 'rubyXL'
 
+gem 'tinymce-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -64,5 +68,7 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-end
 
+  # rspec rails
+  gem 'rspec-rails', '~> 3.0'
+end

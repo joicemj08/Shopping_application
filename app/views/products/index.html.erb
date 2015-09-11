@@ -13,13 +13,29 @@
       </div>
     </div>
     <%= link_to 'ADD PRODUCT', new_product_path, :class=>'btn btn-success'%>
+
   <% end %>
+  <div class ="row">
+    <div class="col-sm-6">
+      <h3>IMPORT PRODUCTS:</h3>
+      <%= form_tag import_products_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import" %>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+        <h3>EXPORT PRODUCTS:</h3>
+        <%= link_to "Download CSV", products_path(format: "csv") %> |
+        <%= link_to "Download Excel", products_path(format: "xls") %>
+      </p>
+    </div>
+  </div>
   <div id="products_div">
     <%= render partial: 'products' %>
   </div>
-  <div class="pagination">
-    <ul>
-      <li> <%= paginate @products, :window => 2 %></li>
-    </ul>
-  </div>
+</div>
+<div class="pagination">
+  <ul>
+    <li> <%= paginate @products, :window => 2 %></li>
+  </ul>
 </div>

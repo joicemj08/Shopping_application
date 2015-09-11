@@ -1,6 +1,9 @@
+#
+# Confirmations Controller -
+#
+# @author [Joice]
+#
 class ConfirmationsController < Devise::ConfirmationsController
-
-
   # def show
   #   p "nnnnnn"
   #   with_unconfirmed_confirmable do
@@ -40,6 +43,4 @@ class ConfirmationsController < Devise::ConfirmationsController
   #   set_flash_message :notice, :confirmed
   #   sign_in_and_redirect(resource_name, @confirmable)
   # end
-
-
 end

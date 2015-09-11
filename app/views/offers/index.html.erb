@@ -7,7 +7,7 @@
     <tr>
         <th>Product Name</th>
         <th>Description</th>
-        <th style="width: 200px;"></th>
+        <th class="table-width">OPERATIONS</th>
     </tr>
   </thead>
   <tbody id="users-tbody">
@@ -15,11 +15,16 @@
       <tr>
         <td><%= link_to offer.product.name, product_path(offer.product_id) %></td>
         <td><%= strip_tags(offer.description) %></td>
-        <td><%= link_to 'Edit', edit_offer_path(offer),:style=>"padding:10px;" %>
-            <%= link_to 'Destroy', offer_path(offer),:style=>"padding:10px;",
+        <td><%= link_to 'Edit', edit_offer_path(offer),class: "set-padding" %>
+            <%= link_to 'Destroy', offer_path(offer),class: "set-padding",
             method: :delete,
             data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<div class="pagination">
+<ul>
+  <li> <%= paginate @offers, :window => 2 %></li>
+</ul>
+</div>

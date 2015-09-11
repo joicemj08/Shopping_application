@@ -1,4 +1,4 @@
-
+<%= javascript_include_tag "cart" %>
 <div id ="products-listing">
     <% @products.each do |product| %>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -6,6 +6,7 @@
           <div class="image">
             <%= image_tag product.avatar.url(:thumb) %>
           </div>
+          <% if product.quantity >=1 %>
           <div class="caption">
             <h4> <%= product.name %><br></h4>
             <p>
@@ -17,43 +18,21 @@
               <p class="price">
                   <strong>Quantity Remaining :</strong> <%= product.quantity %><br>
               </p>
-
-
             </p>
           </div>
           <div  class="button-group">
             <button type="button" class="add-cart" product-id="<%= product.id %>">
               Add to Cart
             </button>
-            <%= number_field_tag 'quantity',1, min: 1, max: product.quantity.to_i %>
+            <%= number_field_tag 'quantity',1, min: 1, max: product.quantity.to_i, style: "margin-top: 7px;" %>
           </div>
+           <% else %>
+            <div class="caption">
+               <h4> <%= product.name %><br></h4>
+              <%= image_tag("outofstock.jpg",size: "200x200")%>
+            </div>
+          <% end %>
         </div>
-
       </div>
     <% end %>
 </div>
-<script type="text/javascript">
-$(function () {
-    $(".add-cart").click(function() {
-        var id = $(this).attr('product-id');
-        var quantity = $(this).next().first().val();
-        $.ajax({
-            url: '/add-cart',
-            type: 'GET',
-            data: {
-                'id': id,
-                'quantity' : quantity
-            },
-            success: function(data){
-                $('#myModal1 .modal-body').html(data);
-            },
-            error: function(){
-              alert('Error');
-            }
-        });
-    });
-
-
-});
-
-</script>

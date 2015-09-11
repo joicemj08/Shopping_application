@@ -17,7 +17,7 @@ class OffersController < ApplicationController
   # GET /offers
   def index
     if current_user.manager? || current_user.admin?
-      @offers = Offer.all
+      @offers = Offer.order('product_id').page(params[:page])
       @product = @offers.product
     else
       flash[:notice] = NOT_AUTHORIZED

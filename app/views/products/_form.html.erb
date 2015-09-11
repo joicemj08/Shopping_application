@@ -1,5 +1,5 @@
 <%= javascript_include_tag "products.js" %>
-<div class="thumbnail" style="padding:20px">
+<div class="thumbnail form-submit" style="padding:20px">
   <h2>PRODUCTS</h2>
   <div id="error"></div>
   <%= form_for(@product) do |f| %>
@@ -11,7 +11,7 @@
     </p>
     <p>
       <div class="form-group field">
-        <%= f.label :CategoryID %><br>
+        <%= f.label :CATEGORY_NAME %><br>
         <%= f.collection_select(:category_id, Category.all, :id, :name) %>
        </div>
     </p>

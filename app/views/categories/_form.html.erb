@@ -1,5 +1,5 @@
 <%= javascript_include_tag "categories.js" %>
-<div class="thumbnail" style="padding:20px">
+<div class="thumbnail form-submit" style="padding:20px">
   <h2>CATEGORIES</h2>
   <div id="error"></div>
   <%= form_for(@category) do |f| %>
@@ -32,6 +32,5 @@
       <%= f.button "submit", type: 'button', :OnClick =>'validateForm()',:class=>'btn btn-success' %>
     </p>
   <% end %>
-
   <%= link_to 'Back', categories_path %>
 </div>

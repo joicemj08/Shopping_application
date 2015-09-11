@@ -1,6 +1,5 @@
 <div class="row" >
-  <h2>EDIT DEATILS</h2>
-
+  <h2>EDIT DETAILS</h2>
 <div class="thumbnail" style="padding:20px">
   <%= form_for (@user) do |f| %>
     <p>
@@ -21,7 +20,7 @@
       <%= f.file_field :avatar %>
     </p>
     <p>
-      <%= f.submit %>
+      <%= f.submit class: 'btn btn-success' %>
     </p>
   <% end %>
 </div>

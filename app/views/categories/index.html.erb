@@ -18,9 +18,10 @@
   <div id="categories_div">
     <%= render partial: 'categories' %>
   </div>
-  <div class="pagination">
-        <ul>
-          <li> <%= paginate @categories, :window => 2 %></li>
-        </ul>
-    </div>
 </div>
+<div class="pagination">
+  <ul>
+    <li> <%= paginate @categories, :window => 2 %></li>
+  </ul>
+</div>
+

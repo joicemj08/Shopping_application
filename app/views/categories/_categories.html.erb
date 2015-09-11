@@ -3,18 +3,17 @@
       <tr>
         <th>CODE</th>
         <th>NAME</th>
-        <th style="width: 250px;"></th>
+        <th style="width: 250px;">OPERATIONS</th>
       </tr>
       </thead>
       <tbody id="categories-tbody">
         <% @categories.each do |category| %>
           <tr>
-
             <td><%= category.code %></td>
             <td><%= category.name %></td>
-            <td><%= link_to 'Show', category_path(category), :style=>"padding:10px;" %>
-              <%= link_to 'Edit', edit_category_path(category), :style=>"padding:10px;" %>
-              <%= link_to 'Destroy', category_path(category), :style=>"padding:10px;",
+            <td><%= link_to 'Show', category_path(category), class: "set-padding" %>
+              <%= link_to 'Edit', edit_category_path(category), class: "set-padding" %>
+              <%= link_to 'Destroy', category_path(category), class: "set-padding",
                   method: :delete,
                   data: { confirm: 'Are you sure?' } %></td>
           </tr>

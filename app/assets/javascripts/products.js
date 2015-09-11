@@ -45,6 +45,6 @@ function validateForm(){
         flag = 1;
     }
     if (flag == 0)
-        $("#new_product").submit();
+        $(".form-submit form").submit();
 }
 

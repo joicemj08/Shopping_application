@@ -21,7 +21,9 @@
   <strong>Role:</strong>
   <%= @user.role %>
 </p>
-
-<td><%= link_to 'Update deatils', edit_user_path(@user) %></td>
-
+<td>
+  <button type="button" class="btn btn-default">
+    <%= link_to 'Update deatils', edit_user_path(@user) %>
+  </button>
+</td>
 

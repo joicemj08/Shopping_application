@@ -16,9 +16,9 @@
 </p>
 <table class="table">
     <tr>
-        <td>Product Name</td>
-        <td>Unit Price</td>
-        <td>Quantity</td>
+        <td><strong>Product Name</strong></td>
+        <td><strong>Unit Price</strong></td>
+        <td><strong>Quantity</strong></td>
     </tr>
     <% @products.each_with_index do |product, index| %>
     <tr>
@@ -28,6 +28,9 @@
     </tr>
     <% end %>
 </table>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'All Categories', categories_path %>
+<button type="button" class="btn btn-default">
+    <%= link_to 'Edit', edit_category_path(@category) %>
+</button>
+<button type="button" class="btn btn-default">
+    <%= link_to 'All Categories', categories_path %>
+</button>

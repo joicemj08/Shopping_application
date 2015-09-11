@@ -6,10 +6,11 @@
 class HomeController < ApplicationController
   layout 'home'
   before_action :authenticate_user!, except: :index
+  include InitializeCart
   # GET /home
+  # list the products and categories in autocomplete search box
   def index
     @user = User.new
-    @offers = Offer.all
     @products = Product.search(params[:search])
     @categories = Category.search(params[:search])
     search_list =  @categories.map { |category| { label: category.name, category: 'Categories', id: category.id  } }
@@ -23,7 +24,7 @@ class HomeController < ApplicationController
       end
     end
   end
-  #GET /home/:id
+  # GET /home/:id
   def show
     @products = Product.all
   end

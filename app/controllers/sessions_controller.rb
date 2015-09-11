@@ -1,3 +1,8 @@
+#
+# SessionsController -
+#
+# @author [Joice]
+#
 class SessionsController < Devise::SessionsController
   layout 'signin'
 

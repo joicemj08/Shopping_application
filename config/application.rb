@@ -1,6 +1,9 @@
-require File.expand_path('../boot', __FILE__)
 
+require File.expand_path('../boot', __FILE__)
 require 'rails/all'
+require 'roo'
+require 'iconv'
+require 'rubyXL' # Assuming rubygems is already required
 
 
 # Require the gems listed in Gemfile, including any gems

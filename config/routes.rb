@@ -1,20 +1,21 @@
 Rails.application.routes.draw do
-
-  devise_for :users, :controllers => { :sessions => "sessions", registrations: "registrations", confirmations: "confirmations"  }
-  resources :categories, defaults: {format: :html}
-  resources :products, defaults: {format: :html}
+  devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations', confirmations: 'confirmations' }
+  resources :categories, defaults: { format: :html }
   resources :cart
   devise_scope :user do
     get '/confirmation' =>'confirmations#show'
     post '/validate' => 'registrations#create'
+  end
+  namespace :api do
+    resources :users, :defaults => { :format => 'json' }
+  end
 
-end
 
   resources :users do
     post :create_user, on: :collection
   end
 
-  resources :home, defaults: {format: :html}
+  resources :home, defaults: { format: :html }
   resources :offers
   resources :dashboard
 
@@ -23,28 +24,22 @@ end
   end
 
   resources :products do
+    post :import, on: :collection
     resources :offers
   end
 
-
-
-
-  concern :paginatable do
-    get '(page/:page)', :action => :index, :on => :collection, :as => ''
-  end
-  resources :my_resources, :concerns => :paginatable
-
   get "/new_user" => 'users#create', :as => :newuser
- # get 'home/index'
+  # get 'home/index'
   get '/search' => 'categories#search'
   get '/index' => 'home#index'
   get '/search_index' => 'products#search'
   get '/check' => 'users#check'
-  get '/add-cart' =>'products#add_to_cart'
-  get '/remove_cart' => 'products#remove_from_cart'
-  get '/purchase' => 'products#purchase'
+  get '/add-cart' => 'cart#add_to_cart'
+  get '/remove_cart' => 'cart#remove_from_cart'
+  get '/purchase' => 'cart#purchase'
+  get '/view-cart' =>'cart#view_cart'
 
-  get '/confirmation' =>'confirmations#show'
+  get '/confirmation' => 'confirmations#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
