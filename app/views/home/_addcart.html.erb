@@ -62,6 +62,9 @@ $(".remove").click(function() {
         $.ajax({
             url: '/purchase',
             type: 'GET',
+            data: {
+                'amount': total,
+            },
             success: function(data){
                 $('#myModal1 .modal-body').html(data);
                 $('#cart-total').html(0);
