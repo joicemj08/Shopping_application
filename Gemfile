@@ -27,6 +27,7 @@ gem 'rails4-autocomplete'
 gem 'font-awesome-rails'
 gem 'therubyracer'
 gem 'flexslider', git: 'https://github.com/constantm/Flexslider-2-Rails-Gem.git'
+gem 'stripe'
 
 gem 'devise'
 # gem 'client_side_validations'

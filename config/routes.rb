@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     resources :users, :defaults => { :format => 'json' }
   end
 
-
   resources :users do
     post :create_user, on: :collection
   end
@@ -18,6 +17,7 @@ Rails.application.routes.draw do
   resources :home, defaults: { format: :html }
   resources :offers
   resources :dashboard
+  resources :charges
 
   resources :categories do
     resources :products
