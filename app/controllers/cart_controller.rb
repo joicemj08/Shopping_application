@@ -40,6 +40,7 @@ class CartController < ApplicationController
   end
   # method to purchase products
   def purchase
+    @amout = params[:amount]
     if user_signed_in?
       session[:cart].each do |p|
         product = Product.find(p['product_id'].to_i)
@@ -48,11 +49,36 @@ class CartController < ApplicationController
         product.update(quantity: qty)
       end
       session[:cart] = nil
-      render partial: 'home/checkout'
+      render partial: 'charges/checkout'
   else
     render template:'/devise/sessions/new', layout: false
   end
 end
+def new
+  end
+
+  def index
+  end
+  def create
+    # Amount in cents
+    #@amount = 500
+
+    customer = Stripe::Customer.create(
+      :email => params[:stripeEmail],
+      :source  => params[:stripeToken]
+    )
+
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => @amount,
+      :description => 'Rails Stripe customer',
+      :currency    => 'usd'
+    )
+
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to new_charge_path
+  end
 def view_cart
   render partial: 'home/addcart'
 end
