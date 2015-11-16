@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   get '/remove_cart' => 'cart#remove_from_cart'
   get '/purchase' => 'cart#purchase'
   get '/view-cart' =>'cart#view_cart'
+  get '/import-creek' => 'products#import_creek'
+  post '/import-file' => 'products#import_file'
 
   get '/confirmation' => 'confirmations#show'
   # The priority is based upon order of creation: first created -> highest priority.

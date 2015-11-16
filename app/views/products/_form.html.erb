@@ -2,6 +2,10 @@
 <div class="thumbnail form-submit" style="padding:20px">
   <h2>PRODUCTS</h2>
   <div id="error"></div>
+  <%= form_tag import_file_path, multipart: true do |f| %>
+    <%= file_field_tag 'datafile' %>
+    <%= submit_tag "Upload" %>
+  <% end %>
   <%= form_for(@product) do |f| %>
     <p>
       <div class="form-group field">

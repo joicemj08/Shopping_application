@@ -9,7 +9,6 @@ class DashboardController < ApplicationController
   def index
     if current_user.manager? || current_user.admin?
       @product = Product.count
-      p @product
       @categories = Category.count
       @users = User.count
     else

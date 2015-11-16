@@ -16,9 +16,10 @@ class ProductsController < ApplicationController
   def index
     if current_user.manager? || current_user.admin?
       @products = Product.search(params[:search]).page(params[:page])
+      @pdts = Product.all
       respond_to do |format|
-        format.csv { send_data @products.to_csv }
-        format.xls {}
+        format.csv { send_data @pdts.to_csv }
+        format.xls {}#{ send_data @pdts.to_csv(col_sep: "\t") } }
         format.html # { render html: @products }# index.html.erb
         format.json do
           html_string = render_to_string(
@@ -33,8 +34,25 @@ class ProductsController < ApplicationController
   end
 
   def import
-  Product.import(params[:file])
-  redirect_to products_path
+    Product.import(params[:file])
+    file = params[:file]
+    #Creek::Book.new file.path, check_file_extension: false
+    redirect_to products_path
+  end
+
+  def import_creek
+    Product.import_creek(params[:file])
+    redirect_to products_path
+  end
+
+  def import_file
+    file_data = params[:datafile]
+    File.open(params[:datafile].path) do |file|
+      file.each_line do |line|
+        p line
+       ## does stuff here....
+      end
+    end
   end
 
   def new

@@ -24,7 +24,6 @@ class CartController < ApplicationController
       end
     end
     cart_init
-    p session[:cart]
     render partial: 'home/addcart'
   end
 

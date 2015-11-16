@@ -9,19 +9,7 @@
         <div class="col-sm-2">
           <h4>QUICK DEALS</h4>
         </div>
-        <div class="col-sm-4">
-          <span id="category" class="visible">
-          <%= form_tag home_index_path, :method => 'get', :id =>"products_search", style: "padding: 2px" do %>
-            <div class="col-lg-6">
-              <div class="input-group" style = "width: 250%">
-                <div class="ui-widget">
-                  <%= text_field_tag :search, params[:search], :id =>"search_text", :placeholder=>"search", :class=>"form-control" %>
-                </div>
-              </div><!-- /input-group -->
-            </div>
-          <% end %>
-         </span>
-        </div>
+
         <div class="col-sm-3">
         <div id="cart" class="btn-group btn-block">
           <button type="button" data-loading-text="Loading..." class="btn btn-inverse btn-block btn-lg dropdown-toggle list-cart" style="width:200px;float:right;" data-toggle="modal" data-target="#myModal1"><i class="fa fa-shopping-cart"></i>
@@ -155,10 +143,10 @@
         <div class="flex-viewport" style="overflow: hidden; position: relative;">
           <ul class="slides" style="width: 100%; -webkit-transition-duration: 0.6s; transition-duration: 0.6s; -webkit-transform: translate3d(0px, 0px, 0px);">
             <li style="width: 1132px; float: left; display: block;">
-              <img src="http://demo.opencart.com/image/cache/catalog/demo/banners/MacBookAir-1140x380.jpg" alt="MacBookAir" class="img-responsive" draggable="false">
+             <%= image_tag("MacBook.jpg")%>
             </li>
             <li style="width: 1132px; float: left; display: block;">
-                <img src="http://demo.opencart.com/image/cache/catalog/demo/banners/iPhone6-1140x380.jpg" alt="iPhone 6" class="img-responsive" draggable="false">
+               <%= image_tag("iPhone6.jpg")%>
             </li>
           </ul>
         </div>
